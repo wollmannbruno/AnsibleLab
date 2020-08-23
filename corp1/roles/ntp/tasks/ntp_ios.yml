@@ -1,5 +1,5 @@
 ---
-- name: Add NTP server to ios devices
+- name: Add NTP server(s) to Cisco IOS devices
   debug:
     msg: "ios box"
 ...
