@@ -1,0 +1,10 @@
+---
+- name: Test Random Stuff
+  hosts: all
+  connection: network_cli
+  gather_facts: false
+
+  tasks:
+  - name: Print group
+    debug: var=ansible_network_os
+...

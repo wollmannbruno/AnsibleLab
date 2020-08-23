@@ -1,0 +1,8 @@
+---
+- hosts: ios
+  tasks:
+  - name: Ping NetAuto
+    cisco.ios.ios_ping:
+      dest: 10.128.0.5
+      vrf: MGMT
+...

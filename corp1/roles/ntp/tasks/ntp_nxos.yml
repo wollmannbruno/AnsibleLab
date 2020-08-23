@@ -1,0 +1,5 @@
+---
+- name: Add NTP server to nxos devices
+  debug:
+    msg: "nxos box"
+...

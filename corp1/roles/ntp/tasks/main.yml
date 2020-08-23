@@ -1,0 +1,3 @@
+---
+- include_tasks: "ntp_{{ ansible_network_os }}.yml"
+...

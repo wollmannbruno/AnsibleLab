@@ -1,0 +1,20 @@
+---
+all:
+  children:
+    ios:
+      hosts:
+        r1:
+          ansible_host: 192.168.248.2
+        s1:
+          ansible_host: 192.168.248.3
+    # asa:
+    #   hosts:
+    #     fw1:
+    #       ansible_host: 192.168.248.4
+    nxos:
+      hosts:
+        7k1:
+          ansible_host: 192.168.248.5
+        9k1:
+          ansible_host: 192.168.248.6
+...

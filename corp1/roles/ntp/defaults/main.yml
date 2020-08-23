@@ -1,0 +1,4 @@
+---
+# defaults file for ntp
+ntp_server: 10.1.1.1
+...

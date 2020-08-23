@@ -1,0 +1,5 @@
+---
+- name: Add NTP server to ios devices
+  debug:
+    msg: "ios box"
+...
