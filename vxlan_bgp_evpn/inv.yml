@@ -1,0 +1,30 @@
+---
+all:
+  children:
+    nxos:
+      children:
+        spines:
+          hosts:
+            spine1:
+              ansible_host: 192.168.248.2
+            spine2:
+              ansible_host: 192.168.248.3
+            spine3:
+              ansible_host: 192.168.248.4
+            spine4:
+              ansible_host: 192.168.248.5
+        leafs:
+          hosts:
+            leaf1:
+              ansible_host: 192.168.248.6
+            leaf2:
+              ansible_host: 192.168.248.7
+            leaf3:
+              ansible_host: 192.168.248.8
+            leaf4:
+              ansible_host: 192.168.248.9
+            leaf5:
+              ansible_host: 192.168.248.10
+            leaf6:
+              ansible_host: 192.168.248.11
+...
