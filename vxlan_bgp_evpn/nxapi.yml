@@ -1,0 +1,16 @@
+---
+- name: Enable NXAPI Feature
+  hosts: all
+
+  tasks:
+  - name: Enable NXAPI Feature
+    cisco.nxos.nxos_feature:
+      feature: nxapi
+      state: enabled
+    notify: wr
+
+  handlers:
+  - name: wr
+    cisco.nxos.nxos_config:
+      save_when: always
+...
