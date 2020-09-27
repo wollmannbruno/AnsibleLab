@@ -1,5 +1,6 @@
 ---
-- hosts: all
+- name: PING HOSTS
+  hosts: all
   tasks:
   - name: Ping NetAuto
     cisco.nxos.nxos_ping:
