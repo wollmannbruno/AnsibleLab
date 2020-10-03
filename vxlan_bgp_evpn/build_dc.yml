@@ -1,0 +1,11 @@
+---
+- name: BUILD DC
+  hosts: all
+  gather_facts: no
+
+  vars_files:
+    - topology.yml
+
+  roles:
+    - underlay
+...

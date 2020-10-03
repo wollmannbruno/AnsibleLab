@@ -1,0 +1,18 @@
+---
+# tasks file for underlay
+- name: TASK 1 - ENABLE FEATURES
+  nxos_feature:
+    feature: "{{ item }}"
+    state: enabled
+  loop: [ospf, pim]
+
+- name: TASK 2 - CONFIGURE PHYSICAL INTERFACES
+  nxos_interfaces:
+    config: "{{ topology['physical_interfaces'][inventory_hostname] }}"
+    state: merged
+
+- name: TASK 3 - CONFIGURE LOOPBACK0 INTERFACES
+  nxos_l3_interfaces:
+    config: "{{ topology['loopback0_l3_interfaces'][inventory_hostname] }}"
+    state: merged
+...
