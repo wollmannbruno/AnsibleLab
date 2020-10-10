@@ -21,6 +21,7 @@ topology:
       - { name: Ethernet1/4, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
       - { name: Ethernet1/5, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
       - { name: Ethernet1/6, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
+      - { name: Loopback0, description: UNDERLAY, enabled: true }
     spine2:
       - { name: Ethernet1/1, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
       - { name: Ethernet1/2, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
@@ -28,6 +29,7 @@ topology:
       - { name: Ethernet1/4, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
       - { name: Ethernet1/5, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
       - { name: Ethernet1/6, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
+      - { name: Loopback0, description: UNDERLAY, enabled: true }
     spine3:
       - { name: Ethernet1/1, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
       - { name: Ethernet1/2, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
@@ -35,6 +37,7 @@ topology:
       - { name: Ethernet1/4, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
       - { name: Ethernet1/5, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
       - { name: Ethernet1/6, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
+      - { name: Loopback0, description: UNDERLAY, enabled: true }
     spine4:
       - { name: Ethernet1/1, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
       - { name: Ethernet1/2, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
@@ -42,36 +45,43 @@ topology:
       - { name: Ethernet1/4, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
       - { name: Ethernet1/5, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
       - { name: Ethernet1/6, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
+      - { name: Loopback0, description: UNDERLAY, enabled: true }
     leaf1:
       - { name: Ethernet1/1, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
       - { name: Ethernet1/2, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
       - { name: Ethernet1/3, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
       - { name: Ethernet1/4, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
+      - { name: Loopback0, description: UNDERLAY, enabled: true }
     leaf2:
       - { name: Ethernet1/1, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
       - { name: Ethernet1/2, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
       - { name: Ethernet1/3, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
       - { name: Ethernet1/4, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
+      - { name: Loopback0, description: UNDERLAY, enabled: true }
     leaf3:
       - { name: Ethernet1/1, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
       - { name: Ethernet1/2, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
       - { name: Ethernet1/3, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
       - { name: Ethernet1/4, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
+      - { name: Loopback0, description: UNDERLAY, enabled: true }
     leaf4:
       - { name: Ethernet1/1, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
       - { name: Ethernet1/2, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
       - { name: Ethernet1/3, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
       - { name: Ethernet1/4, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
+      - { name: Loopback0, description: UNDERLAY, enabled: true }
     leaf5:
       - { name: Ethernet1/1, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
       - { name: Ethernet1/2, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
       - { name: Ethernet1/3, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
       - { name: Ethernet1/4, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
+      - { name: Loopback0, description: UNDERLAY, enabled: true }
     leaf6:
       - { name: Ethernet1/1, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
       - { name: Ethernet1/2, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
       - { name: Ethernet1/3, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
       - { name: Ethernet1/4, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
+      - { name: Loopback0, description: UNDERLAY, enabled: true }
 
   loopback0_l3_interfaces:
     spine1:

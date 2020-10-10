@@ -1,9 +1,15 @@
 ---
 - name: PING HOSTS
   hosts: all
+  gather_facts: no
   tasks:
   - name: Ping NetAuto
     cisco.nxos.nxos_ping:
       dest: 10.128.0.5
       vrf: management
+    register: stuff
+
+  - name: PRINT STUFF
+    debug:
+      msg: "{{ stuff['commands'] }}"
 ...

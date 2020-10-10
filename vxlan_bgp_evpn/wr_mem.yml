@@ -1,0 +1,9 @@
+---
+- name: SAVE CONFIGURATION
+  hosts: all
+
+  tasks:
+  - name: COPY RUNNING-CONFIG TO STARTUP-CONFIG
+    cisco.nxos.nxos_config:
+      save_when: modified
+...

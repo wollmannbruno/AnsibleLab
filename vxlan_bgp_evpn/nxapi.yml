@@ -1,13 +1,20 @@
 ---
-- name: Enable NXAPI Feature
+- name: PLAY - ENABLE NXAPI FEATURE
   hosts: all
 
   tasks:
-  - name: Enable NXAPI Feature
+  - name: TASK 1 - ENABLE NXAPI FEATURE
     cisco.nxos.nxos_feature:
       feature: nxapi
       state: enabled
-    notify: wr
+    # notify: wr
+
+  - name: TASK 2 - CONFIGURE NXAPI
+    cisco.nxos.nxos_nxapi:
+      http: no
+      https: yes
+      tlsv1_0: no
+      tlsv1_2: yes
 
   handlers:
   - name: wr

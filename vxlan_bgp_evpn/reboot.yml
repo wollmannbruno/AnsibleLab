@@ -1,0 +1,9 @@
+---
+- name: REBOOT DEVICES
+  hosts: all
+
+  tasks:
+  - name: REBOOT DEVICES
+    cisco.nxos.nxos_reboot:
+      confirm: yes
+...
