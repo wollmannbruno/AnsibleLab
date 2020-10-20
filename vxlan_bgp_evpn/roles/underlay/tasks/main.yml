@@ -1,18 +1,66 @@
 ---
 # tasks file for underlay
-- name: TASK 1 - ENABLE FEATURES
-  nxos_feature:
-    feature: "{{ item }}"
-    state: enabled
-  loop: [ospf, pim]
+# - name: TASK 1 - ENABLE FEATURES
+#   cisco.nxos.nxos_feature:
+#     feature: "{{ item }}"
+#     state: enabled
+#   loop: [ospf, pim]
 
-- name: TASK 2 - CONFIGURE PHYSICAL INTERFACES
-  nxos_interfaces:
-    config: "{{ topology['physical_interfaces'][inventory_hostname] }}"
-    state: merged
+# - name: TASK 2 - CONFIGURE AND ENABLE ETHERNET AND LOOPBACK INTERFACES
+#   cisco.nxos.nxos_interfaces:
+#     config: "{{ topology['interfaces_config'][inventory_hostname] }}"
+#     state: merged
+#     # state: rendered
+#   # register: output
 
-- name: TASK 3 - CONFIGURE LOOPBACK0 INTERFACES
-  nxos_l3_interfaces:
-    config: "{{ topology['loopback0_l3_interfaces'][inventory_hostname] }}"
-    state: merged
+# - name: PRINT COMMANDS
+#   debug:
+#     msg: "{{ output['rendered'] }}"
+
+# - name: TASK 3 - L3 CONFIGURATION OF LOOPBACK INTERFACES
+#   cisco.nxos.nxos_l3_interfaces:
+#     config: "{{ topology['loopback_l3_interfaces'][inventory_hostname] }}"
+#     state: merged
+
+# - name: TASK 4 - IP UNNUMBERED ETHERNET INTERFACES
+#   cisco.nxos.nxos_config:
+#     lines:
+#       - medium p2p
+#       - ip unnumbered loopback0
+#     parents: interface {{ item }}
+#   loop: "{{ topology['physical_interfaces_list'][inventory_hostname] }}"
+
+# - name: TASK 5 - CONFIGURE OSPF PROCESS
+#   cisco.nxos.nxos_ospfv2:
+#     config:
+#       processes:
+#       - process_id: UNDERLAY
+#         router_id: "{{ topology['ospf_routerid'][inventory_hostname]['routerid'] }}"
+#         areas:
+#         - area_id: 0.0.0.0
+#           authentication:
+#             message_digest: yes
+#             set: yes
+#     state: merged
+#   register: output
+
+- name: TASK 6 - CONFIGURE INTERFACES WITH OSPF
+  cisco.nxos.nxos_interface_ospf:
+    interface: "{{ item }}"
+    area: 0.0.0.0
+    # message_digest: yes
+    message_digest_algorithm_type: md5
+    message_digest_encryption_type: default
+    message_digest_key_id: "8"
+    message_digest_password: underlay
+    network: point-to-point
+    ospf: UNDERLAY
+    state: present
+  loop: "{{ topology['interfaces_list'][inventory_hostname] }}"
+  register: output
+
+# - name: PRINT COMMANDS
+#   debug:
+#     msg: "{{ item }}['commands'] }}"
+#   loop: "{{ output['results'] }}"
 ...

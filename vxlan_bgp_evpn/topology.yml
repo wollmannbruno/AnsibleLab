@@ -1,7 +1,7 @@
 ---
 topology:
 
-  physical_config:
+  physical_interfaces_list:
     spine1: [Ethernet1/1, Ethernet1/2, Ethernet1/3, Ethernet1/4, Ethernet1/5, Ethernet1/6]
     spine2: [Ethernet1/1, Ethernet1/2, Ethernet1/3, Ethernet1/4, Ethernet1/5, Ethernet1/6]
     spine3: [Ethernet1/1, Ethernet1/2, Ethernet1/3, Ethernet1/4, Ethernet1/5, Ethernet1/6]
@@ -13,95 +13,155 @@ topology:
     leaf5: [Ethernet1/1, Ethernet1/2, Ethernet1/3, Ethernet1/4]
     leaf6: [Ethernet1/1, Ethernet1/2, Ethernet1/3, Ethernet1/4]
 
-  physical_interfaces:
-    spine1:
-      - { name: Ethernet1/1, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
-      - { name: Ethernet1/2, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
-      - { name: Ethernet1/3, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
-      - { name: Ethernet1/4, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
-      - { name: Ethernet1/5, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
-      - { name: Ethernet1/6, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
-      - { name: Loopback0, description: UNDERLAY, enabled: true }
-    spine2:
-      - { name: Ethernet1/1, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
-      - { name: Ethernet1/2, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
-      - { name: Ethernet1/3, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
-      - { name: Ethernet1/4, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
-      - { name: Ethernet1/5, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
-      - { name: Ethernet1/6, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
-      - { name: Loopback0, description: UNDERLAY, enabled: true }
-    spine3:
-      - { name: Ethernet1/1, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
-      - { name: Ethernet1/2, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
-      - { name: Ethernet1/3, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
-      - { name: Ethernet1/4, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
-      - { name: Ethernet1/5, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
-      - { name: Ethernet1/6, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
-      - { name: Loopback0, description: UNDERLAY, enabled: true }
-    spine4:
-      - { name: Ethernet1/1, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
-      - { name: Ethernet1/2, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
-      - { name: Ethernet1/3, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
-      - { name: Ethernet1/4, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
-      - { name: Ethernet1/5, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
-      - { name: Ethernet1/6, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
-      - { name: Loopback0, description: UNDERLAY, enabled: true }
-    leaf1:
-      - { name: Ethernet1/1, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
-      - { name: Ethernet1/2, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
-      - { name: Ethernet1/3, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
-      - { name: Ethernet1/4, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
-      - { name: Loopback0, description: UNDERLAY, enabled: true }
-    leaf2:
-      - { name: Ethernet1/1, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
-      - { name: Ethernet1/2, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
-      - { name: Ethernet1/3, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
-      - { name: Ethernet1/4, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
-      - { name: Loopback0, description: UNDERLAY, enabled: true }
-    leaf3:
-      - { name: Ethernet1/1, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
-      - { name: Ethernet1/2, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
-      - { name: Ethernet1/3, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
-      - { name: Ethernet1/4, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
-      - { name: Loopback0, description: UNDERLAY, enabled: true }
-    leaf4:
-      - { name: Ethernet1/1, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
-      - { name: Ethernet1/2, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
-      - { name: Ethernet1/3, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
-      - { name: Ethernet1/4, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
-      - { name: Loopback0, description: UNDERLAY, enabled: true }
-    leaf5:
-      - { name: Ethernet1/1, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
-      - { name: Ethernet1/2, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
-      - { name: Ethernet1/3, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
-      - { name: Ethernet1/4, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
-      - { name: Loopback0, description: UNDERLAY, enabled: true }
-    leaf6:
-      - { name: Ethernet1/1, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
-      - { name: Ethernet1/2, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
-      - { name: Ethernet1/3, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
-      - { name: Ethernet1/4, description: UNDERLAY, enabled: true, mode: layer3, mtu: "9216" }
-      - { name: Loopback0, description: UNDERLAY, enabled: true }
+  interfaces_list:
+    spine1: [Loopback0, Ethernet1/1, Ethernet1/2, Ethernet1/3, Ethernet1/4, Ethernet1/5, Ethernet1/6]
+    spine2: [Loopback0, Loopback1, Ethernet1/1, Ethernet1/2, Ethernet1/3, Ethernet1/4, Ethernet1/5, Ethernet1/6]
+    spine3: [Loopback0, Loopback1, Ethernet1/1, Ethernet1/2, Ethernet1/3, Ethernet1/4, Ethernet1/5, Ethernet1/6]
+    spine4: [Loopback0, Ethernet1/1, Ethernet1/2, Ethernet1/3, Ethernet1/4, Ethernet1/5, Ethernet1/6]
+    leaf1: [Loopback0, Loopback1, Ethernet1/1, Ethernet1/2, Ethernet1/3, Ethernet1/4]
+    leaf2: [Loopback0, Loopback1, Ethernet1/1, Ethernet1/2, Ethernet1/3, Ethernet1/4]
+    leaf3: [Loopback0, Loopback1, Ethernet1/1, Ethernet1/2, Ethernet1/3, Ethernet1/4]
+    leaf4: [Loopback0, Loopback1, Ethernet1/1, Ethernet1/2, Ethernet1/3, Ethernet1/4]
+    leaf5: [Loopback0, Loopback1, Ethernet1/1, Ethernet1/2, Ethernet1/3, Ethernet1/4]
+    leaf6: [Loopback0, Loopback1, Ethernet1/1, Ethernet1/2, Ethernet1/3, Ethernet1/4]
 
-  loopback0_l3_interfaces:
+  interfaces_config:
     spine1:
-      - { name: Loopback0, ipv4: [address: 10.1.0.101/32] }
+      - name: Ethernet1/1
+        description: LEAF1 E1/1
+        enabled: true
+        mode: layer3
+        mtu: "9216"
+      - { name: Ethernet1/2, description: LEAF2 E1/1, enabled: true, mode: layer3, mtu: "9216" }
+      - { name: Ethernet1/3, description: LEAF3 E1/1, enabled: true, mode: layer3, mtu: "9216" }
+      - { name: Ethernet1/4, description: LEAF4 E1/1, enabled: true, mode: layer3, mtu: "9216" }
+      - { name: Ethernet1/5, description: LEAF5 E1/1, enabled: true, mode: layer3, mtu: "9216" }
+      - { name: Ethernet1/6, description: LEAF6 E1/1, enabled: true, mode: layer3, mtu: "9216" }
+      - { name: Loopback0, description: P2P, enabled: true }
     spine2:
-      - { name: Loopback0, ipv4: [address: 10.1.0.102/32] }
+      - { name: Ethernet1/1, description: LEAF1 E1/2, enabled: true, mode: layer3, mtu: "9216" }
+      - { name: Ethernet1/2, description: LEAF2 E1/2, enabled: true, mode: layer3, mtu: "9216" }
+      - { name: Ethernet1/3, description: LEAF3 E1/2, enabled: true, mode: layer3, mtu: "9216" }
+      - { name: Ethernet1/4, description: LEAF4 E1/2, enabled: true, mode: layer3, mtu: "9216" }
+      - { name: Ethernet1/5, description: LEAF5 E1/2, enabled: true, mode: layer3, mtu: "9216" }
+      - { name: Ethernet1/6, description: LEAF6 E1/2, enabled: true, mode: layer3, mtu: "9216" }
+      - { name: Loopback0, description: P2P, enabled: true }
+      - { name: Loopback1, description: BGP ROUTE REFLECTOR, enabled: true }
     spine3:
-      - { name: Loopback0, ipv4: [address: 10.1.0.103/32] }
+      - { name: Ethernet1/1, description: LEAF1 E1/3, enabled: true, mode: layer3, mtu: "9216" }
+      - { name: Ethernet1/2, description: LEAF2 E1/3, enabled: true, mode: layer3, mtu: "9216" }
+      - { name: Ethernet1/3, description: LEAF3 E1/3, enabled: true, mode: layer3, mtu: "9216" }
+      - { name: Ethernet1/4, description: LEAF4 E1/3, enabled: true, mode: layer3, mtu: "9216" }
+      - { name: Ethernet1/5, description: LEAF5 E1/3, enabled: true, mode: layer3, mtu: "9216" }
+      - { name: Ethernet1/6, description: LEAF6 E1/3, enabled: true, mode: layer3, mtu: "9216" }
+      - { name: Loopback0, description: P2P, enabled: true }
+      - { name: Loopback1, description: BGP ROUTE REFLECTOR, enabled: true }
     spine4:
-      - { name: Loopback0, ipv4: [address: 10.1.0.104/32] }
+      - { name: Ethernet1/1, description: LEAF1 E1/4, enabled: true, mode: layer3, mtu: "9216" }
+      - { name: Ethernet1/2, description: LEAF2 E1/4, enabled: true, mode: layer3, mtu: "9216" }
+      - { name: Ethernet1/3, description: LEAF3 E1/4, enabled: true, mode: layer3, mtu: "9216" }
+      - { name: Ethernet1/4, description: LEAF4 E1/4, enabled: true, mode: layer3, mtu: "9216" }
+      - { name: Ethernet1/5, description: LEAF5 E1/4, enabled: true, mode: layer3, mtu: "9216" }
+      - { name: Ethernet1/6, description: LEAF6 E1/4, enabled: true, mode: layer3, mtu: "9216" }
+      - { name: Loopback0, description: P2P, enabled: true }
+    leaf1:
+      - { name: Ethernet1/1, description: SPINE1 E1/1, enabled: true, mode: layer3, mtu: "9216" }
+      - { name: Ethernet1/2, description: SPINE2 E1/1, enabled: true, mode: layer3, mtu: "9216" }
+      - { name: Ethernet1/3, description: SPINE3 E1/1, enabled: true, mode: layer3, mtu: "9216" }
+      - { name: Ethernet1/4, description: SPINE4 E1/1, enabled: true, mode: layer3, mtu: "9216" }
+      - { name: Loopback0, description: P2P, enabled: true }
+      - { name: Loopback1, description: VTEP, enabled: true }
+    leaf2:
+      - { name: Ethernet1/1, description: SPINE1 E1/2, enabled: true, mode: layer3, mtu: "9216" }
+      - { name: Ethernet1/2, description: SPINE2 E1/2, enabled: true, mode: layer3, mtu: "9216" }
+      - { name: Ethernet1/3, description: SPINE3 E1/2, enabled: true, mode: layer3, mtu: "9216" }
+      - { name: Ethernet1/4, description: SPINE4 E1/2, enabled: true, mode: layer3, mtu: "9216" }
+      - { name: Loopback0, description: P2P, enabled: true }
+      - { name: Loopback1, description: VTEP, enabled: true }
+    leaf3:
+      - { name: Ethernet1/1, description: SPINE1 E1/3, enabled: true, mode: layer3, mtu: "9216" }
+      - { name: Ethernet1/2, description: SPINE2 E1/3, enabled: true, mode: layer3, mtu: "9216" }
+      - { name: Ethernet1/3, description: SPINE3 E1/3, enabled: true, mode: layer3, mtu: "9216" }
+      - { name: Ethernet1/4, description: SPINE4 E1/3, enabled: true, mode: layer3, mtu: "9216" }
+      - { name: Loopback0, description: P2P, enabled: true }
+      - { name: Loopback1, description: VTEP, enabled: true }
+    leaf4:
+      - { name: Ethernet1/1, description: SPINE1 E1/4, enabled: true, mode: layer3, mtu: "9216" }
+      - { name: Ethernet1/2, description: SPINE2 E1/4, enabled: true, mode: layer3, mtu: "9216" }
+      - { name: Ethernet1/3, description: SPINE3 E1/4, enabled: true, mode: layer3, mtu: "9216" }
+      - { name: Ethernet1/4, description: SPINE4 E1/4, enabled: true, mode: layer3, mtu: "9216" }
+      - { name: Loopback0, description: P2P, enabled: true }
+      - { name: Loopback1, description: VTEP, enabled: true }
+    leaf5:
+      - { name: Ethernet1/1, description: SPINE1 E1/5, enabled: true, mode: layer3, mtu: "9216" }
+      - { name: Ethernet1/2, description: SPINE2 E1/5, enabled: true, mode: layer3, mtu: "9216" }
+      - { name: Ethernet1/3, description: SPINE3 E1/5, enabled: true, mode: layer3, mtu: "9216" }
+      - { name: Ethernet1/4, description: SPINE4 E1/5, enabled: true, mode: layer3, mtu: "9216" }
+      - { name: Loopback0, description: P2P, enabled: true }
+      - { name: Loopback1, description: VTEP, enabled: true }
+    leaf6:
+      - { name: Ethernet1/1, description: SPINE1 E1/6, enabled: true, mode: layer3, mtu: "9216" }
+      - { name: Ethernet1/2, description: SPINE2 E1/6, enabled: true, mode: layer3, mtu: "9216" }
+      - { name: Ethernet1/3, description: SPINE3 E1/6, enabled: true, mode: layer3, mtu: "9216" }
+      - { name: Ethernet1/4, description: SPINE4 E1/6, enabled: true, mode: layer3, mtu: "9216" }
+      - { name: Loopback0, description: P2P, enabled: true }
+      - { name: Loopback1, description: VTEP, enabled: true }
+
+  loopback_l3_interfaces:
+    spine1:
+      - { name: Loopback0, ipv4: [address: 10.1.0.201/32] }
+    spine2:
+      - { name: Loopback0, ipv4: [address: 10.1.0.202/32] }
+      - { name: Loopback1, ipv4: [address: 10.1.1.202/32] }
+    spine3:
+      - { name: Loopback0, ipv4: [address: 10.1.0.203/32] }
+      - { name: Loopback1, ipv4: [address: 10.1.1.203/32] }
+    spine4:
+      - { name: Loopback0, ipv4: [address: 10.1.0.204/32] }
     leaf1:
       - { name: Loopback0, ipv4: [address: 10.1.0.1/32] }
+      - name: Loopback1
+        ipv4:
+        - {address: 10.1.1.1/32}
+        - {address: 10.1.1.101/32, secondary: yes }
     leaf2:
       - { name: Loopback0, ipv4: [address: 10.1.0.2/32] }
+      - name: Loopback1
+        ipv4:
+        - {address: 10.1.1.2/32}
+        - {address: 10.1.1.101/32, secondary: yes}
     leaf3:
       - { name: Loopback0, ipv4: [address: 10.1.0.3/32] }
+      - { name: Loopback1, ipv4: [address: 10.1.1.3/32] }
     leaf4:
       - { name: Loopback0, ipv4: [address: 10.1.0.4/32] }
+      - { name: Loopback1, ipv4: [address: 10.1.1.4/32] }
     leaf5:
       - { name: Loopback0, ipv4: [address: 10.1.0.5/32] }
+      - { name: Loopback1, ipv4: [address: 10.1.1.5/32] }
     leaf6:
       - { name: Loopback0, ipv4: [address: 10.1.0.6/32] }
+      - { name: Loopback1, ipv4: [address: 10.1.1.6/32] }
+
+  ospf_routerid:
+    spine1:
+      routerid: 10.1.0.201
+    spine2:
+      routerid: 10.1.0.202
+    spine3:
+      routerid: 10.1.0.203
+    spine4:
+      routerid: 10.1.0.204
+    leaf1:
+      routerid: 10.1.0.1
+    leaf2:
+      routerid: 10.1.0.2
+    leaf3:
+      routerid: 10.1.0.3
+    leaf4:
+      routerid: 10.1.0.4
+    leaf5:
+      routerid: 10.1.0.5
+    leaf6:
+      routerid: 10.1.0.6
 ...
