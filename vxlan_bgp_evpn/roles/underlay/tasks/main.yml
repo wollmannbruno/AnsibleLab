@@ -1,63 +1,77 @@
 ---
 # tasks file for underlay
-# - name: TASK 1 - ENABLE FEATURES
-#   cisco.nxos.nxos_feature:
-#     feature: "{{ item }}"
-#     state: enabled
-#   loop: [ospf, pim]
 
-# - name: TASK 2 - CONFIGURE AND ENABLE ETHERNET AND LOOPBACK INTERFACES
-#   cisco.nxos.nxos_interfaces:
-#     config: "{{ topology['interfaces_config'][inventory_hostname] }}"
-#     state: merged
-#     # state: rendered
-#   # register: output
+- name: TASK 1 - ENABLE FEATURES
+  cisco.nxos.nxos_feature:
+    feature: "{{ item }}"
+    state: enabled
+  loop: [ospf, pim]
+
+- name: TASK 2 - CONFIGURE AND ENABLE ETHERNET AND LOOPBACK INTERFACES
+  cisco.nxos.nxos_interfaces:
+    config: "{{ topology['interfaces_config'][inventory_hostname] }}"
+    state: merged
+    # state: rendered
+  # register: output
 
 # - name: PRINT COMMANDS
 #   debug:
 #     msg: "{{ output['rendered'] }}"
 
-# - name: TASK 3 - L3 CONFIGURATION OF LOOPBACK INTERFACES
-#   cisco.nxos.nxos_l3_interfaces:
-#     config: "{{ topology['loopback_l3_interfaces'][inventory_hostname] }}"
-#     state: merged
+- name: TASK 3 - L3 CONFIGURATION OF LOOPBACK INTERFACES
+  cisco.nxos.nxos_l3_interfaces:
+    config: "{{ topology['loopback_l3_interfaces'][inventory_hostname] }}"
+    state: merged
 
-# - name: TASK 4 - IP UNNUMBERED ETHERNET INTERFACES
-#   cisco.nxos.nxos_config:
-#     lines:
-#       - medium p2p
-#       - ip unnumbered loopback0
-#     parents: interface {{ item }}
-#   loop: "{{ topology['physical_interfaces_list'][inventory_hostname] }}"
+- name: TASK 4 - IP UNNUMBERED ETHERNET INTERFACES
+  cisco.nxos.nxos_config:
+    lines:
+      - medium p2p
+      - ip unnumbered loopback0
+      - ip ospf message-digest 8 md5 0 ansible
+    parents: interface {{ item }}
+  loop: "{{ topology['physical_interfaces_list'][inventory_hostname] }}"
 
-# - name: TASK 5 - CONFIGURE OSPF PROCESS
-#   cisco.nxos.nxos_ospfv2:
-#     config:
-#       processes:
-#       - process_id: UNDERLAY
-#         router_id: "{{ topology['ospf_routerid'][inventory_hostname]['routerid'] }}"
-#         areas:
-#         - area_id: 0.0.0.0
-#           authentication:
-#             message_digest: yes
-#             set: yes
-#     state: merged
-#   register: output
+- name: TASK 5 - CONFIGURE OSPF PROCESS
+  cisco.nxos.nxos_ospfv2:
+    config:
+      processes:
+      - process_id: UNDERLAY
+        router_id: "{{ topology['ospf_routerid'][inventory_hostname]['routerid'] }}"
+        areas:
+        - area_id: 0.0.0.0
+          authentication:
+            message_digest: yes
+            set: yes
+    state: merged
+  register: output
 
 - name: TASK 6 - CONFIGURE INTERFACES WITH OSPF
   cisco.nxos.nxos_interface_ospf:
     interface: "{{ item }}"
     area: 0.0.0.0
     # message_digest: yes
-    message_digest_algorithm_type: md5
-    message_digest_encryption_type: default
-    message_digest_key_id: "8"
-    message_digest_password: underlay
+    # message_digest_algorithm_type: md5
+    # message_digest_encryption_type: default
+    # message_digest_key_id: "8"
+    # message_digest_password: underlay
     network: point-to-point
     ospf: UNDERLAY
     state: present
   loop: "{{ topology['interfaces_list'][inventory_hostname] }}"
   register: output
+
+- name: TASK 7 - ENABLE PIM SPARSE MODE ON INTERFACES
+  cisco.nxos.nxos_pim_interface:
+    interface: "{{ item }}"
+    sparse: yes
+    state: present
+  loop: "{{ topology['interfaces_list'][inventory_hostname] }}"
+
+- name: TASK 8 - CONFIGURE PIM RP ADDRESS
+  cisco.nxos.nxos_pim_rp_address:
+    rp_address: "{{ topology['rp_address'] }}"
+    state: present
 
 # - name: PRINT COMMANDS
 #   debug:
