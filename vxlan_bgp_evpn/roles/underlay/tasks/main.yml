@@ -42,7 +42,7 @@
         - area_id: 0.0.0.0
           authentication:
             message_digest: yes
-            set: yes
+            # set: yes
     state: merged
   register: output
 
@@ -50,11 +50,6 @@
   cisco.nxos.nxos_interface_ospf:
     interface: "{{ item }}"
     area: 0.0.0.0
-    # message_digest: yes
-    # message_digest_algorithm_type: md5
-    # message_digest_encryption_type: default
-    # message_digest_key_id: "8"
-    # message_digest_password: underlay
     network: point-to-point
     ospf: UNDERLAY
     state: present
@@ -72,6 +67,13 @@
   cisco.nxos.nxos_pim_rp_address:
     rp_address: "{{ topology['rp_address'] }}"
     state: present
+
+- name: TASK 9 - CONFIGURE SPINES WITH PIM ANYCAST RPS
+  cisco.nxos.nxos_config:
+    lines:
+      - ip pim anycast-rp {{ topology['rp_address'] }} {{ item }}
+  loop: "{{ topology['anycast_rps'] }}"
+  when: "'spines' in group_names"
 
 # - name: PRINT COMMANDS
 #   debug:
