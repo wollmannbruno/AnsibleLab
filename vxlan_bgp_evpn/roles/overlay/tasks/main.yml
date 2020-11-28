@@ -1,2 +1,41 @@
 ---
 # tasks file for overlay
+
+- name: TASK 1 - ENABLE FEATURES ON ROUTE REFLECTORS
+  cisco.nxos.nxos_feature:
+    feature: "{{ item }}"
+    state: enabled
+  loop: [bgp, "nv overlay"]
+  when: "'rr' in group_names"
+
+- name: TASK 2 - ENABLE FEATURES ON LEAFS
+  cisco.nxos.nxos_feature:
+    feature: "{{ item }}"
+    state: enabled
+  loop: [bgp, "nv overlay", interface-vlan, vn-segment-vlan-based]
+  when: "'leafs' in group_names"
+
+- name: TASK 3 - ENABLE EVPN CONTROL PLANE ON ROUTE REFLECTORS AND LEAFS
+  cisco.nxos.nxos_evpn_global:
+    nv_overlay_evpn: yes
+  when: ('rr' in group_names) or ('leafs' in group_names)
+
+- name: TASK 4 - CONFIGURE ANYCAST GATEWAY MAC ON LEAFS
+  cisco.nxos.nxos_overlay_global:
+    anycast_gateway_mac: 0000.000B.00BS
+  when: "'leafs' in group_names"
+
+- name: TASK 5 - CREATE NVE INTERFACE ON LEAFS
+  cisco.nxos.nxos_interfaces:
+    config:
+    - name: nve1
+      description: VIRTUAL TUNNEL ENDPOINT (VTEP)
+      enabled: true
+      mode: layer3
+      # mtu: 9216
+  when: "'leafs' in group_names"
+
+- name: TASK 6 - CONFIGURE NVE INTERFACE ON LEAFS
+  cisco.nxos.nxos_vxlan_vtep:
+  
+...
