@@ -7,6 +7,6 @@
     - topology.yml
 
   roles:
-    # - underlay
-    - overlay
+    - underlay
+    # - overlay
 ...

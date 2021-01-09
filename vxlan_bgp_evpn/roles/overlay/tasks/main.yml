@@ -22,7 +22,7 @@
 
 - name: TASK 4 - CONFIGURE ANYCAST GATEWAY MAC ON LEAFS
   cisco.nxos.nxos_overlay_global:
-    anycast_gateway_mac: 0000.000B.00BS
+    anycast_gateway_mac: "{{ anycast_gateway_mac }}"
   when: "'leafs' in group_names"
 
 - name: TASK 5 - CREATE NVE INTERFACE ON LEAFS
