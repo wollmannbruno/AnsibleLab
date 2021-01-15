@@ -1,0 +1,33 @@
+---
+- name: single task
+  hosts: all
+  gather_facts: no
+  vars_files:
+    - topology.yml
+
+  tasks:
+  - name: TASK 6 - CONFIGURE INTERFACES WITH OSPF
+    cisco.nxos.nxos_ospf_interfaces:
+      config:
+        - name: "{{ item }}"
+          address_family:
+          - afi: ipv4
+            message_digest_key:
+              encryption: 0
+              key: "{{ ospf_md5_key }}"
+              key_id: "{{ ospf_md5_keyid }}"
+            network: point-to-point
+            processes:
+            - process_id: UNDERLAY
+              area:
+                area_id: 0.0.0.0
+                secondaries: no
+      state: merged
+    loop: "{{ interfaces_list[inventory_hostname] }}"
+    register: output
+
+  - name: OUTPUT
+    debug:
+      msg: "{{ item['commands'] }}"
+    loop: "{{ output['results'] }}"
+...
