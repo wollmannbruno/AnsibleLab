@@ -6,28 +6,23 @@
     - topology.yml
 
   tasks:
-  - name: TASK 6 - CONFIGURE INTERFACES WITH OSPF
-    cisco.nxos.nxos_ospf_interfaces:
-      config:
-        - name: "{{ item }}"
-          address_family:
-          - afi: ipv4
-            message_digest_key:
-              encryption: 0
-              key: "{{ ospf_md5_key }}"
-              key_id: "{{ ospf_md5_keyid }}"
-            network: point-to-point
-            processes:
-            - process_id: UNDERLAY
-              area:
-                area_id: 0.0.0.0
-                secondaries: no
-      state: merged
-    loop: "{{ interfaces_list[inventory_hostname] }}"
+  - name: TASK 9 - ADD L2VPN AFI TO ROUTE REFLECTORS
+    cisco.nxos.nxos_bgp_neighbor_af:
+      afi: l2vpn
+      asn: "{{ bgp_asn }}"
+      neighbor: "{{ item }}"
+      route_reflector_client: yes
+      safi: evpn
+      send_community: both
+    loop: "{{ rr_bgp_neighbours }}"
+    when: "'rr' in group_names"
     register: output
 
   - name: OUTPUT
     debug:
+      # msg: "{{ output }}"
+      # msg: "{{ output['commands'] }}"
       msg: "{{ item['commands'] }}"
     loop: "{{ output['results'] }}"
+    when: "'rr' in group_names"
 ...

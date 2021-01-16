@@ -30,7 +30,7 @@
     config:
       processes:
       - process_id: UNDERLAY
-        router_id: "{{ ospf_routerid[inventory_hostname]['routerid'] }}"
+        router_id: "{{ routerid[inventory_hostname]['rid'] }}"
         areas:
         - area_id: 0.0.0.0
           authentication:
@@ -50,7 +50,8 @@
             key_id: "{{ ospf_md5_keyid }}"
           network: point-to-point
           processes:
-          - area:
+          - process_id: UNDERLAY
+            area:
               area_id: 0.0.0.0
               secondaries: no
     state: merged

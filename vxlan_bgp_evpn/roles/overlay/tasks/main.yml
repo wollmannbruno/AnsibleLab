@@ -36,11 +36,38 @@
 - name: TASK 6 - CONFIGURE NVE INTERFACE ON LEAFS
   cisco.nxos.nxos_vxlan_vtep:
     interface: nve1
-    global_mcast_group_L2: default
-    global_mcast_group_L3: default
+    global_mcast_group_L2: "{{ global_l2_mcast_group }}"
     global_suppress_arp: yes
     host_reachability: yes
     shutdown: no
     source_interface: Loopback1
   when: "'leafs' in group_names"
+
+- name: TASK 7 - CONFIGURE BGP ON ROUTE REFLECTORS AND LEAFS
+  cisco.nxos.nxos_bgp:
+    asn: "{{ bgp_asn }}"
+    log_neighbor_changes: yes
+    router_id: "{{ routerid[inventory_hostname]['rid'] }}"
+    shutdown: no
+  when: ('rr' in group_names) or ('leafs' in group_names)
+
+- name: TASK 8 - ADD BGP NEIGHBOURS TO ROUTE REFLECTORS
+  cisco.nxos.nxos_bgp_neighbor:
+    asn: "{{ bgp_asn }}"
+    neighbor: "{{ item }}"
+    remote_as: "{{ bgp_asn }}"
+    update_source: loopback1
+  loop: "{{ rr_bgp_neighbours }}"
+  when: "'rr' in group_names"
+
+- name: TASK 9 - ADD L2VPN AFI TO ROUTE REFLECTORS
+  cisco.nxos.nxos_bgp_neighbor_af:
+    afi: l2vpn
+    asn: "{{ bgp_asn }}"
+    neighbor: "{{ item }}"
+    route_reflector_client: yes
+    safi: evpn
+    send_community: both
+  loop: "{{ rr_bgp_neighbours }}"
+  when: "'rr' in group_names"
 ...
