@@ -6,16 +6,15 @@
     - topology.yml
 
   tasks:
-  - name: TASK 9 - ADD L2VPN AFI TO ROUTE REFLECTORS
+  - name: TASK 11 - ADD L2VPN AFI TO LEAFS
     cisco.nxos.nxos_bgp_neighbor_af:
       afi: l2vpn
       asn: "{{ bgp_asn }}"
       neighbor: "{{ item }}"
-      route_reflector_client: yes
       safi: evpn
       send_community: both
-    loop: "{{ rr_bgp_neighbours }}"
-    when: "'rr' in group_names"
+    loop: "{{ leaf_bgp_neighbours }}"
+    when: "'leafs' in group_names"
     register: output
 
   - name: OUTPUT
@@ -24,5 +23,5 @@
       # msg: "{{ output['commands'] }}"
       msg: "{{ item['commands'] }}"
     loop: "{{ output['results'] }}"
-    when: "'rr' in group_names"
+    when: "'leafs' in group_names"
 ...
