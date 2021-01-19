@@ -5,8 +5,10 @@
 
   vars_files:
     - topology_vars.yml
+    - tenant_vars.yml
 
   roles:
     - underlay
     - overlay
+    # - tenant
 ...

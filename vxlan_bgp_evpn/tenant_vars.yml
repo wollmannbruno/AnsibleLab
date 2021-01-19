@@ -1,17 +1,20 @@
 ---
 tenant_vrfs:
-  - PROD
+  - { name: PROD, rd: auto, vni: "301000" }
 
 overlay_vrf_vlans:
-  PROD:
-    - { vlan: 1000, vnid: 301000 }
+  - { name: PROD, vlan: "1000", vnid: "301000" }
 
 service_vlans:
   PROD:
-    - { vlan: 1001, name: PROD_WEB, vnid: 201001 }
+    - { vlan: "1101", name: PROD_WEB, vnid: "201001" }
 
 svis:
   PROD:
     - { name: vlan1001, ipv4: [address: 10.100.1.1/24] }
 
+leafs:
+  - leaf1
+  - leaf2
+  - leaf5
 ...

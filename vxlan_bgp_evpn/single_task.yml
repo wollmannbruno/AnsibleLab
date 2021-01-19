@@ -3,21 +3,22 @@
   hosts: all
   gather_facts: no
   vars_files:
-    - topology.yml
+    - topology_vars.yml
+    - tenant_vars.yml
 
   tasks:
   - name: TASK 1 - CREATE TENANT VRFS
     cisco.nxos.nxos_vrf:
-      aggregate:
-        - { name: PROD, interfaces: [vlan1001, vlan1002], vni: 301000 }
-    when: "'leafs' in group_names"
+      aggregate: "{{ tenant_vrfs }}"
+    when: "inventory_hostname in {{ leafs }}"
     register: output
 
   - name: OUTPUT
     debug:
       # msg: "{{ output }}"
-      # msg: "{{ output['commands'] }}"
-      msg: "{{ item['commands'] }}"
-    loop: "{{ output['results'] }}"
-    when: "'leafs' in group_names"
+      msg: "{{ output['commands'] }}"
+    #   msg: "{{ item['commands'] }}"
+    # loop: "{{ output['results'] }}"
+    # when: "'leafs' in group_names"
+    when: "inventory_hostname in {{ leafs }}"
 ...
