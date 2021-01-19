@@ -4,7 +4,7 @@
   gather_facts: no
 
   vars_files:
-    - topology.yml
+    - topology_vars.yml
 
   roles:
     - underlay

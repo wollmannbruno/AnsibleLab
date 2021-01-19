@@ -6,14 +6,10 @@
     - topology.yml
 
   tasks:
-  - name: TASK 11 - ADD L2VPN AFI TO LEAFS
-    cisco.nxos.nxos_bgp_neighbor_af:
-      afi: l2vpn
-      asn: "{{ bgp_asn }}"
-      neighbor: "{{ item }}"
-      safi: evpn
-      send_community: both
-    loop: "{{ leaf_bgp_neighbours }}"
+  - name: TASK 1 - CREATE TENANT VRFS
+    cisco.nxos.nxos_vrf:
+      aggregate:
+        - { name: PROD, interfaces: [vlan1001, vlan1002], vni: 301000 }
     when: "'leafs' in group_names"
     register: output
 
