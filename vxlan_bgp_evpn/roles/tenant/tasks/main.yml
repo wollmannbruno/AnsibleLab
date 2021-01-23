@@ -1,8 +1,23 @@
 ---
 # tasks file for tenant
 
-- name: TASK 1 - CREATE TENANT VRFS
+- name: TASK 1 - CREATE AN OVERLAY VLAN FOR EACH TENANT VRF
+  cisco.nxos.nxos_vlans:
+    config: "{{ overlay_vrf_vlans[inventory_hostname] }}"
+  when: "inventory_hostname in overlay_vrf_vlans"
+
+- name: TASK 2 - CREATE CORE-FACING INTERFACE FOR EACH TENANT VRF
+  cisco.nxos.nxos_interfaces:
+    config: "{{ core_facing_svi[inventory_hostname] }}"
+  when: "inventory_hostname in core_facing_svi"
+
+- name: TASK 2 - CREATE TENANT VRFS
   cisco.nxos.nxos_vrf:
-    aggregate: "{{ tenant_vrfs }}"
-  when: "'leafs' in group_names"
+    aggregate: "{{ tenant_vrfs[inventory_hostname] }}"
+  when: "inventory_hostname in tenant_vrfs"
+
+- name: TASK 3 - CREATE SERVICE VLANS FOR EACH TENANT
+  cisco.nxos.nxos_vlans:
+    config: "{{ service_vlans[inventory_hostname] }}"
+  when: "inventory_hostname in service_vlans"
 ...

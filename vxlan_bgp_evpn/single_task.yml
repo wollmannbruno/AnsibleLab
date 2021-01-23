@@ -7,18 +7,19 @@
     - tenant_vars.yml
 
   tasks:
-  - name: TASK 1 - CREATE TENANT VRFS
-    cisco.nxos.nxos_vrf:
-      aggregate: "{{ tenant_vrfs }}"
-    when: "inventory_hostname in {{ leafs }}"
+  - name: test
+    cisco.nxos.nxos_interfaces:
+      config: "{{ core_facing_svi[inventory_hostname] }}"
+    when: "inventory_hostname in core_facing_svi"
     register: output
 
   - name: OUTPUT
     debug:
       # msg: "{{ output }}"
       msg: "{{ output['commands'] }}"
-    #   msg: "{{ item['commands'] }}"
+      # msg: "{{ item['commands'] }}"
     # loop: "{{ output['results'] }}"
     # when: "'leafs' in group_names"
-    when: "inventory_hostname in {{ leafs }}"
+    # when: "inventory_hostname in leafs"
+    when: "inventory_hostname in core_facing_svi"
 ...

@@ -1,0 +1,16 @@
+---
+- name: SHOW SOMETHING
+  hosts: all
+  gather_facts: no
+
+  tasks:
+  - name: SHOW COMMAND
+    cisco.nxos.nxos_command:
+      # commands: show ip ospf neighbors
+      commands: show bgp l2vpn evpn summary
+    register: output
+
+  - name: OUTPUT
+    debug:
+      msg: "{{ output['stdout_lines'][0] }}"
+...
