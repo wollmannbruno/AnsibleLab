@@ -9,6 +9,16 @@ overlay_vrf_vlans:
   leaf3:
     - { name: PROD_OVERLAY, vlan_id: "1100", mapped_vni: "301100" }
 
+core_facing_svi:
+  leaf1:
+    - { name: vlan1100, description: CORE-FACING SVI FOR PROD TENANT, enabled: yes, ip_forward: yes }
+    - { name: vlan1200, description: CORE-FACING SVI FOR NPRD TENANT, enabled: yes, ip_forward: yes }
+  leaf2:
+    - { name: vlan1100, description: CORE-FACING SVI FOR PROD TENANT, enabled: yes, ip_forward: yes }
+    - { name: vlan1200, description: CORE-FACING SVI FOR NPRD TENANT, enabled: yes, ip_forward: yes }
+  leaf3:
+    - { name: vlan1100, description: CORE-FACING SVI FOR PROD TENANT, enabled: yes, ip_forward: yes }
+
 tenant_vrfs:
   leaf1:
     - { name: PROD, rd: auto, vni: "301100" }
@@ -19,20 +29,15 @@ tenant_vrfs:
   leaf3:
     - { name: PROD, rd: auto, vni: "301100" }
 
-core_facing_svi:
-  leaf1:
-    - { name: vlan1100, description: CORE-FACING SVI FOR PROD VRF, enabled: yes, ip_forward: yes }
-    - { name: vlan1200, description: CORE-FACING SVI FOR NPRD VRF, enabled: yes, ip_forward: yes }
-  leaf2:
-    - { name: vlan1100, description: CORE-FACING SVI FOR PROD VRF, enabled: yes, ip_forward: yes }
-    - { name: vlan1200, description: CORE-FACING SVI FOR NPRD VRF, enabled: yes, ip_forward: yes }
-  leaf3:
-    - { name: vlan1100, description: CORE-FACING SVI FOR PROD VRF, enabled: yes, ip_forward: yes }
-
 core_facing_svi_vrf:
   leaf1:
     - { name: vlan1100, vrf: PROD }
     - { name: vlan1200, vrf: NPRD }
+  leaf2:
+    - { name: vlan1100, vrf: PROD }
+    - { name: vlan1200, vrf: NPRD }
+  leaf3:
+    - { name: vlan1100, vrf: PROD }
 
 service_vlans:
   leaf1:

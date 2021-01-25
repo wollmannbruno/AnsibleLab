@@ -8,18 +8,20 @@
 
   tasks:
   - name: test
-    cisco.nxos.nxos_interfaces:
-      config: "{{ core_facing_svi[inventory_hostname] }}"
-    when: "inventory_hostname in core_facing_svi"
+    cisco.nxos.nxos_vrf_interface:
+      interface: "{{ item['name'] }}"
+      vrf: "{{ item['vrf'] }}"
+    loop: "{{ core_facing_svi_vrf[inventory_hostname] }}"
+    when: "inventory_hostname in core_facing_svi_vrf"
     register: output
 
   - name: OUTPUT
     debug:
       # msg: "{{ output }}"
-      msg: "{{ output['commands'] }}"
-      # msg: "{{ item['commands'] }}"
-    # loop: "{{ output['results'] }}"
+      # msg: "{{ output['commands'] }}"
+      msg: "{{ item['commands'] }}"
+    loop: "{{ output['results'] }}"
     # when: "'leafs' in group_names"
     # when: "inventory_hostname in leafs"
-    when: "inventory_hostname in core_facing_svi"
+    when: "inventory_hostname in core_facing_svi_vrf"
 ...

@@ -11,13 +11,20 @@
     config: "{{ core_facing_svi[inventory_hostname] }}"
   when: "inventory_hostname in core_facing_svi"
 
-- name: TASK 2 - CREATE TENANT VRFS
+- name: TASK 3 - CREATE TENANT VRFS
   cisco.nxos.nxos_vrf:
     aggregate: "{{ tenant_vrfs[inventory_hostname] }}"
   when: "inventory_hostname in tenant_vrfs"
 
-- name: TASK 3 - CREATE SERVICE VLANS FOR EACH TENANT
-  cisco.nxos.nxos_vlans:
-    config: "{{ service_vlans[inventory_hostname] }}"
-  when: "inventory_hostname in service_vlans"
+- name: TASK 4 - ASSIGN CORE-FACING INTERFACE TO THE TENANT VRF
+  cisco.nxos.nxos_vrf_interface:
+    interface: "{{ item['name'] }}"
+    vrf: "{{ item['vrf'] }}"
+  loop: "{{ core_facing_svi_vrf[inventory_hostname] }}"
+  when: "inventory_hostname in core_facing_svi_vrf"
+
+# - name: TASK ? - CREATE SERVICE VLANS FOR EACH TENANT
+#   cisco.nxos.nxos_vlans:
+#     config: "{{ service_vlans[inventory_hostname] }}"
+#   when: "inventory_hostname in service_vlans"
 ...
