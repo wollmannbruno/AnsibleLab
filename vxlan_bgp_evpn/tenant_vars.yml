@@ -11,13 +11,13 @@ overlay_vrf_vlans:
 
 core_facing_svi:
   leaf1:
-    - { name: vlan1100, description: CORE-FACING SVI FOR PROD TENANT, enabled: yes, ip_forward: yes }
-    - { name: vlan1200, description: CORE-FACING SVI FOR NPRD TENANT, enabled: yes, ip_forward: yes }
+    - { name: vlan1100, description: CORE-FACING SVI FOR PROD TENANT, enabled: true, ip_forward: true }
+    - { name: vlan1200, description: CORE-FACING SVI FOR NPRD TENANT, enabled: true, ip_forward: true }
   leaf2:
-    - { name: vlan1100, description: CORE-FACING SVI FOR PROD TENANT, enabled: yes, ip_forward: yes }
-    - { name: vlan1200, description: CORE-FACING SVI FOR NPRD TENANT, enabled: yes, ip_forward: yes }
+    - { name: vlan1100, description: CORE-FACING SVI FOR PROD TENANT, enabled: true, ip_forward: true }
+    - { name: vlan1200, description: CORE-FACING SVI FOR NPRD TENANT, enabled: true, ip_forward: true }
   leaf3:
-    - { name: vlan1100, description: CORE-FACING SVI FOR PROD TENANT, enabled: yes, ip_forward: yes }
+    - { name: vlan1100, description: CORE-FACING SVI FOR PROD TENANT, enabled: true, ip_forward: true }
 
 tenant_vrfs:
   leaf1:
@@ -29,15 +29,25 @@ tenant_vrfs:
   leaf3:
     - { name: PROD, rd: auto, vni: "301100" }
 
+tenant_vrfs_afi:
+  leaf1:
+    - { vrf: PROD, afi: ipv4 }
+    - { vrf: NPRD, afi: ipv4 }
+  leaf2:
+    - { vrf: PROD, afi: ipv4 }
+    - { vrf: NPRD, afi: ipv4 }
+  leaf3:
+    - { vrf: PROD, afi: ipv4 }
+
 core_facing_svi_vrf:
   leaf1:
-    - { name: vlan1100, vrf: PROD }
-    - { name: vlan1200, vrf: NPRD }
+    - { interface: vlan1100, vrf: PROD }
+    - { interface: vlan1200, vrf: NPRD }
   leaf2:
-    - { name: vlan1100, vrf: PROD }
-    - { name: vlan1200, vrf: NPRD }
+    - { interface: vlan1100, vrf: PROD }
+    - { interface: vlan1200, vrf: NPRD }
   leaf3:
-    - { name: vlan1100, vrf: PROD }
+    - { interface: vlan1100, vrf: PROD }
 
 service_vlans:
   leaf1:
@@ -59,8 +69,63 @@ service_vlans:
     - { name: PROD_APP, vlan_id: "1121", mapped_vni: "201121" }
     - { name: PROD_DB, vlan_id: "1131", mapped_vni: "201131" }
 
-svis:
+svi_interfaces:
   leaf1:
-    PROD:
-      - { name: vlan1101, ipv4: [address: 10.100.1.1/24] }
+    - { name: vlan1111, description: PROD_WEB, enabled: true, mtu: "9216" }
+    - { name: vlan1121, description: PROD_APP, enabled: true, mtu: "9216" }
+    - { name: vlan1131, description: PROD_DB, enabled: true, mtu: "9216" }
+    - { name: vlan1211, description: NPRD_WEB, enabled: true, mtu: "9216" }
+    - { name: vlan1221, description: NPRD_APP, enabled: true, mtu: "9216" }
+    - { name: vlan1231, description: NPRD_DB, enabled: true, mtu: "9216" }
+  leaf2:
+    - { name: vlan1111, description: PROD_WEB, enabled: true, mtu: "9216" }
+    - { name: vlan1121, description: PROD_APP, enabled: true, mtu: "9216" }
+    - { name: vlan1131, description: PROD_DB, enabled: true, mtu: "9216" }
+    - { name: vlan1211, description: NPRD_WEB, enabled: true, mtu: "9216" }
+    - { name: vlan1221, description: NPRD_APP, enabled: true, mtu: "9216" }
+    - { name: vlan1231, description: NPRD_DB, enabled: true, mtu: "9216" }
+  leaf3:
+    - { name: vlan1111, description: PROD_WEB, enabled: true, mtu: "9216" }
+    - { name: vlan1121, description: PROD_APP, enabled: true, mtu: "9216" }
+    - { name: vlan1131, description: PROD_DB, enabled: true, mtu: "9216" }
+
+svi_vrf:
+  leaf1:
+    - { interface: Vlan1111, vrf: PROD }
+    - { interface: Vlan1121, vrf: PROD }
+    - { interface: Vlan1131, vrf: PROD }
+    - { interface: Vlan1211, vrf: NPRD }
+    - { interface: Vlan1221, vrf: NPRD }
+    - { interface: Vlan1231, vrf: NPRD }
+  leaf2:
+    - { interface: Vlan1111, vrf: PROD }
+    - { interface: Vlan1121, vrf: PROD }
+    - { interface: Vlan1131, vrf: PROD }
+    - { interface: Vlan1211, vrf: NPRD }
+    - { interface: Vlan1221, vrf: NPRD }
+    - { interface: Vlan1231, vrf: NPRD }
+  leaf3:
+    - { interface: Vlan1111, vrf: PROD }
+    - { interface: Vlan1121, vrf: PROD }
+    - { interface: Vlan1131, vrf: PROD }
+
+svi_l3:
+  leaf1:
+    - { name: vlan1111, ipv4: [address: 10.100.0.1/24] }
+    - { name: vlan1121, ipv4: [address: 10.100.1.1/24] }
+    - { name: vlan1131, ipv4: [address: 10.100.2.1/24] }
+    - { name: vlan1211, ipv4: [address: 10.100.16.1/24] }
+    - { name: vlan1221, ipv4: [address: 10.100.17.1/24] }
+    - { name: vlan1231, ipv4: [address: 10.100.18.1/24] }
+  leaf2:
+    - { name: vlan1111, ipv4: [address: 10.100.0.1/24] }
+    - { name: vlan1121, ipv4: [address: 10.100.1.1/24] }
+    - { name: vlan1131, ipv4: [address: 10.100.2.1/24] }
+    - { name: vlan1211, ipv4: [address: 10.100.16.1/24] }
+    - { name: vlan1221, ipv4: [address: 10.100.17.1/24] }
+    - { name: vlan1231, ipv4: [address: 10.100.18.1/24] }
+  leaf3:
+    - { name: vlan1111, ipv4: [address: 10.100.0.1/24] }
+    - { name: vlan1121, ipv4: [address: 10.100.1.1/24] }
+    - { name: vlan1131, ipv4: [address: 10.100.2.1/24] }
 ...
