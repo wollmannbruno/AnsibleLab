@@ -8,9 +8,9 @@
 
   tasks:
   - name: test
-    cisco.nxos.nxos_interfaces:
-      config: "{{ svi_interfaces[inventory_hostname] }}"
-    when: "inventory_hostname in svi_interfaces"
+    cisco.nxos.nxos_l3_interfaces:
+      config: "{{ svi_l3[inventory_hostname] }}"
+    when: "inventory_hostname in svi_l3"
     register: output
 
   - name: OUTPUT
@@ -21,5 +21,5 @@
     # loop: "{{ output['results'] }}"
     # when: "'leafs' in group_names"
     # when: "inventory_hostname in leafs"
-    when: "inventory_hostname in svi_interfaces"
+    when: "inventory_hostname in svi_l3"
 ...

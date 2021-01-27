@@ -71,23 +71,23 @@ service_vlans:
 
 svi_interfaces:
   leaf1:
-    - { name: vlan1111, description: PROD_WEB, enabled: true, mtu: "9216" }
-    - { name: vlan1121, description: PROD_APP, enabled: true, mtu: "9216" }
-    - { name: vlan1131, description: PROD_DB, enabled: true, mtu: "9216" }
-    - { name: vlan1211, description: NPRD_WEB, enabled: true, mtu: "9216" }
-    - { name: vlan1221, description: NPRD_APP, enabled: true, mtu: "9216" }
-    - { name: vlan1231, description: NPRD_DB, enabled: true, mtu: "9216" }
+    - { name: vlan1111, description: PROD_WEB, enabled: true, mtu: "9216", fabric_forwarding_anycast_gateway: true }
+    - { name: vlan1121, description: PROD_APP, enabled: true, mtu: "9216", fabric_forwarding_anycast_gateway: true }
+    - { name: vlan1131, description: PROD_DB, enabled: true, mtu: "9216", fabric_forwarding_anycast_gateway: true }
+    - { name: vlan1211, description: NPRD_WEB, enabled: true, mtu: "9216", fabric_forwarding_anycast_gateway: true }
+    - { name: vlan1221, description: NPRD_APP, enabled: true, mtu: "9216", fabric_forwarding_anycast_gateway: true }
+    - { name: vlan1231, description: NPRD_DB, enabled: true, mtu: "9216", fabric_forwarding_anycast_gateway: true }
   leaf2:
-    - { name: vlan1111, description: PROD_WEB, enabled: true, mtu: "9216" }
-    - { name: vlan1121, description: PROD_APP, enabled: true, mtu: "9216" }
-    - { name: vlan1131, description: PROD_DB, enabled: true, mtu: "9216" }
-    - { name: vlan1211, description: NPRD_WEB, enabled: true, mtu: "9216" }
-    - { name: vlan1221, description: NPRD_APP, enabled: true, mtu: "9216" }
-    - { name: vlan1231, description: NPRD_DB, enabled: true, mtu: "9216" }
+    - { name: vlan1111, description: PROD_WEB, enabled: true, mtu: "9216", fabric_forwarding_anycast_gateway: true }
+    - { name: vlan1121, description: PROD_APP, enabled: true, mtu: "9216", fabric_forwarding_anycast_gateway: true }
+    - { name: vlan1131, description: PROD_DB, enabled: true, mtu: "9216", fabric_forwarding_anycast_gateway: true }
+    - { name: vlan1211, description: NPRD_WEB, enabled: true, mtu: "9216", fabric_forwarding_anycast_gateway: true }
+    - { name: vlan1221, description: NPRD_APP, enabled: true, mtu: "9216", fabric_forwarding_anycast_gateway: true }
+    - { name: vlan1231, description: NPRD_DB, enabled: true, mtu: "9216", fabric_forwarding_anycast_gateway: true }
   leaf3:
-    - { name: vlan1111, description: PROD_WEB, enabled: true, mtu: "9216" }
-    - { name: vlan1121, description: PROD_APP, enabled: true, mtu: "9216" }
-    - { name: vlan1131, description: PROD_DB, enabled: true, mtu: "9216" }
+    - { name: vlan1111, description: PROD_WEB, enabled: true, mtu: "9216", fabric_forwarding_anycast_gateway: true }
+    - { name: vlan1121, description: PROD_APP, enabled: true, mtu: "9216", fabric_forwarding_anycast_gateway: true }
+    - { name: vlan1131, description: PROD_DB, enabled: true, mtu: "9216", fabric_forwarding_anycast_gateway: true }
 
 svi_vrf:
   leaf1:

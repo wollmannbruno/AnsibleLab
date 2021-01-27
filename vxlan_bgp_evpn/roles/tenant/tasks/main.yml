@@ -47,8 +47,12 @@
   loop: "{{ svi_vrf[inventory_hostname] }}"
   when: "inventory_hostname in svi_vrf"
 
+- name: TASK 9 - ASSIGN IP ADDRESS TO EACH SVI
+  cisco.nxos.nxos_l3_interfaces:
+    config: "{{ svi_l3[inventory_hostname] }}"
+  when: "inventory_hostname in svi_l3"
 
-# - name: TASK 9 - set ip for each svi
+
 # - name: TASK 10 - add vni to nve1
 # - name: TASK 11 - add svi to bgp
 ...
