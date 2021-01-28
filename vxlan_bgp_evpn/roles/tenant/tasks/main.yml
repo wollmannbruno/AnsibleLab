@@ -52,7 +52,20 @@
     config: "{{ svi_l3[inventory_hostname] }}"
   when: "inventory_hostname in svi_l3"
 
+- name: TASK 10 - ADD L2 VNI TO THE VTEP INTERFACE
+  cisco.nxos.nxos_vxlan_vtep_vni:
+    interface: nve1
+    vni: "{{ item }}"
+  loop: "{{ member_vnis[inventory_hostname] }}"
+  when: "inventory_hostname in member_vnis"
 
-# - name: TASK 10 - add vni to nve1
-# - name: TASK 11 - add svi to bgp
+- name: TASK 11 - ADD SERVICE NETWORKS TO BGP
+  cisco.nxos.nxos_bgp_af:
+    asn: "{{ bgp_asn }}"
+    afi: ipv4
+    safi: unicast
+    vrf: "{{ item['vrf'] }}"
+    networks: "{{ item['networks'] }}"
+  loop: "{{ bgp_vrf[inventory_hostname] }}"
+  when: "inventory_hostname in bgp_vrf"
 ...

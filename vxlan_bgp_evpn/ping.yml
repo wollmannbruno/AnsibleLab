@@ -9,7 +9,7 @@
       vrf: management
     register: stuff
 
-  - name: PRINT STUFF
-    debug:
-      msg: "{{ stuff['commands'] }}"
+  # - name: PRINT STUFF
+  #   debug:
+  #     msg: "{{ stuff['commands'] }}"
 ...
