@@ -9,7 +9,7 @@
       # commands: show ip ospf neighbors
       # commands: show bgp l2vpn evpn summary
       # commands: show ip int br vrf all
-      # commands: show run interface nve1
+      # commands: show run interface E1/1
       commands: show run bgp
     register: output
 

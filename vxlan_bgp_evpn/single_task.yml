@@ -8,23 +8,17 @@
 
   tasks:
   - name: test
-    cisco.nxos.nxos_bgp_af:
-      asn: "{{ bgp_asn }}"
-      afi: ipv4
-      safi: unicast
-      vrf: "{{ item['vrf'] }}"
-      networks: "{{ item['networks'] }}"
-    loop: "{{ bgp_vrf[inventory_hostname] }}"
-    when: "inventory_hostname in bgp_vrf"
+    cisco.nxos.nxos_bgp_global:
+      config: "{{ bgp_global[inventory_hostname] }}"
+    when: "inventory_hostname in bgp_global"
     register: output
 
   - name: OUTPUT
     debug:
       # msg: "{{ output }}"
-      # msg: "{{ output['commands'] }}"
-      msg: "{{ item['commands'] }}"
-    loop: "{{ output['results'] }}"
+      msg: "{{ output['commands'] }}"
+      # msg: "{{ item['commands'] }}"
+    # loop: "{{ output['results'] }}"
     # when: "'leafs' in group_names"
-    when: "inventory_hostname in member_vnis"
-    # when: "inventory_hostname in svi_l3"
+    when: "inventory_hostname in bgp_global"
 ...

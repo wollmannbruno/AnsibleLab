@@ -43,22 +43,27 @@
     source_interface: Loopback1
   when: "'leafs' in group_names"
 
-- name: TASK 7 - CONFIGURE BGP ON ROUTE REFLECTORS AND LEAFS
-  cisco.nxos.nxos_bgp:
-    asn: "{{ bgp_asn }}"
-    log_neighbor_changes: yes
-    router_id: "{{ routerid[inventory_hostname]['rid'] }}"
-    shutdown: no
-  when: ('rr' in group_names) or ('leafs' in group_names)
+- name: TASK 7 - BASE BGP CONFIGURATION ON ROUTE REFLECTORS AND LEAFS
+  cisco.nxos.nxos_bgp_global:
+    config: "{{ bgp_global[inventory_hostname] }}"
+  when: "inventory_hostname in bgp_global"
 
-- name: TASK 8 - ADD BGP NEIGHBOURS TO ROUTE REFLECTORS
-  cisco.nxos.nxos_bgp_neighbor:
-    asn: "{{ bgp_asn }}"
-    neighbor: "{{ item }}"
-    remote_as: "{{ bgp_asn }}"
-    update_source: loopback1
-  loop: "{{ rr_bgp_neighbours }}"
-  when: "'rr' in group_names"
+# - name: TASK 7 - CONFIGURE BGP ON ROUTE REFLECTORS AND LEAFS
+#   cisco.nxos.nxos_bgp:
+#     asn: "{{ bgp_asn }}"
+#     log_neighbor_changes: yes
+#     router_id: "{{ routerid[inventory_hostname]['rid'] }}"
+#     shutdown: no
+#   when: ('rr' in group_names) or ('leafs' in group_names)
+
+# - name: TASK 8 - ADD BGP NEIGHBOURS TO ROUTE REFLECTORS
+#   cisco.nxos.nxos_bgp_neighbor:
+#     asn: "{{ bgp_asn }}"
+#     neighbor: "{{ item }}"
+#     remote_as: "{{ bgp_asn }}"
+#     update_source: loopback1
+#   loop: "{{ rr_bgp_neighbours }}"
+#   when: "'rr' in group_names"
 
 - name: TASK 9 - ADD L2VPN AFI TO ROUTE REFLECTORS
   cisco.nxos.nxos_bgp_neighbor_af:
@@ -71,14 +76,14 @@
   loop: "{{ rr_bgp_neighbours }}"
   when: "'rr' in group_names"
 
-- name: TASK 10 - ADD BGP NEIGHBOURS TO LEAFS
-  cisco.nxos.nxos_bgp_neighbor:
-    asn: "{{ bgp_asn }}"
-    neighbor: "{{ item }}"
-    remote_as: "{{ bgp_asn }}"
-    update_source: loopback1
-  loop: "{{ leaf_bgp_neighbours }}"
-  when: "'leafs' in group_names"
+# - name: TASK 10 - ADD BGP NEIGHBOURS TO LEAFS
+#   cisco.nxos.nxos_bgp_neighbor:
+#     asn: "{{ bgp_asn }}"
+#     neighbor: "{{ item }}"
+#     remote_as: "{{ bgp_asn }}"
+#     update_source: loopback1
+#   loop: "{{ leaf_bgp_neighbours }}"
+#   when: "'leafs' in group_names"
 
 - name: TASK 11 - ADD L2VPN AFI TO LEAFS
   cisco.nxos.nxos_bgp_neighbor_af:

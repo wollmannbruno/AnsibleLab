@@ -195,4 +195,78 @@ rr_bgp_neighbours:
 leaf_bgp_neighbours:
   - 10.1.1.202
   - 10.1.1.203
+
+bgp_global:
+  spine2:
+    as_number: "64512"
+    log_neighbor_changes: true
+    neighbors:
+      - { neighbor_address: 10.1.1.1, description: LEAF1, password: { encryption: 0, key: wigwam}, remote_as: "64512", shutdown: false, update_source: loopback1 }
+      - { neighbor_address: 10.1.1.2, description: LEAF2, password: { encryption: 0, key: wigwam}, remote_as: "64512", shutdown: false, update_source: loopback1 }
+      - { neighbor_address: 10.1.1.3, description: LEAF3, password: { encryption: 0, key: wigwam}, remote_as: "64512", shutdown: false, update_source: loopback1 }
+      - { neighbor_address: 10.1.1.4, description: LEAF4, password: { encryption: 0, key: wigwam}, remote_as: "64512", shutdown: false, update_source: loopback1 }
+      - { neighbor_address: 10.1.1.5, description: LEAF5, password: { encryption: 0, key: wigwam}, remote_as: "64512", shutdown: false, update_source: loopback1 }
+      - { neighbor_address: 10.1.1.6, description: LEAF6, password: { encryption: 0, key: wigwam}, remote_as: "64512", shutdown: false, update_source: loopback1 }
+    router_id: 10.1.0.202
+    shutdown: false
+  spine3:
+    as_number: "64512"
+    log_neighbor_changes: true
+    neighbors:
+      - { neighbor_address: 10.1.1.1, description: LEAF1, password: { encryption: 0, key: wigwam}, remote_as: "64512", shutdown: false, update_source: loopback1 }
+      - { neighbor_address: 10.1.1.2, description: LEAF2, password: { encryption: 0, key: wigwam}, remote_as: "64512", shutdown: false, update_source: loopback1 }
+      - { neighbor_address: 10.1.1.3, description: LEAF3, password: { encryption: 0, key: wigwam}, remote_as: "64512", shutdown: false, update_source: loopback1 }
+      - { neighbor_address: 10.1.1.4, description: LEAF4, password: { encryption: 0, key: wigwam}, remote_as: "64512", shutdown: false, update_source: loopback1 }
+      - { neighbor_address: 10.1.1.5, description: LEAF5, password: { encryption: 0, key: wigwam}, remote_as: "64512", shutdown: false, update_source: loopback1 }
+      - { neighbor_address: 10.1.1.6, description: LEAF6, password: { encryption: 0, key: wigwam}, remote_as: "64512", shutdown: false, update_source: loopback1 }
+    router_id: 10.1.0.202
+    shutdown: false
+  leaf1:
+    as_number: "64512"
+    log_neighbor_changes: true
+    neighbors:
+      - { neighbor_address: 10.1.1.202, description: SPINE2, password: { encryption: 0, key: wigwam}, remote_as: "64512", shutdown: false, update_source: loopback1 }
+      - { neighbor_address: 10.1.1.203, description: SPINE3, password: { encryption: 0, key: wigwam}, remote_as: "64512", shutdown: false, update_source: loopback1 }
+    router_id: 10.1.0.1
+    shutdown: false
+  leaf2:
+    as_number: "64512"
+    log_neighbor_changes: true
+    neighbors:
+      - { neighbor_address: 10.1.1.202, description: SPINE2, password: { encryption: 0, key: wigwam}, remote_as: "64512", shutdown: false, update_source: loopback1 }
+      - { neighbor_address: 10.1.1.203, description: SPINE3, password: { encryption: 0, key: wigwam}, remote_as: "64512", shutdown: false, update_source: loopback1 }
+    router_id: 10.1.0.2
+    shutdown: false
+  leaf3:
+    as_number: "64512"
+    log_neighbor_changes: true
+    neighbors:
+      - { neighbor_address: 10.1.1.202, description: SPINE2, password: { encryption: 0, key: wigwam}, remote_as: "64512", shutdown: false, update_source: loopback1 }
+      - { neighbor_address: 10.1.1.203, description: SPINE3, password: { encryption: 0, key: wigwam}, remote_as: "64512", shutdown: false, update_source: loopback1 }
+    router_id: 10.1.0.3
+    shutdown: false
+  leaf4:
+    as_number: "64512"
+    log_neighbor_changes: true
+    neighbors:
+      - { neighbor_address: 10.1.1.202, description: SPINE2, password: { encryption: 0, key: wigwam}, remote_as: "64512", shutdown: false, update_source: loopback1 }
+      - { neighbor_address: 10.1.1.203, description: SPINE3, password: { encryption: 0, key: wigwam}, remote_as: "64512", shutdown: false, update_source: loopback1 }
+    router_id: 10.1.0.4
+    shutdown: false
+  leaf5:
+    as_number: "64512"
+    log_neighbor_changes: true
+    neighbors:
+      - { neighbor_address: 10.1.1.202, description: SPINE2, password: { encryption: 0, key: wigwam}, remote_as: "64512", shutdown: false, update_source: loopback1 }
+      - { neighbor_address: 10.1.1.203, description: SPINE3, password: { encryption: 0, key: wigwam}, remote_as: "64512", shutdown: false, update_source: loopback1 }
+    router_id: 10.1.0.5
+    shutdown: false
+  leaf6:
+    as_number: "64512"
+    log_neighbor_changes: true
+    neighbors:
+      - { neighbor_address: 10.1.1.202, description: SPINE2, password: { encryption: 0, key: wigwam}, remote_as: "64512", shutdown: false, update_source: loopback1 }
+      - { neighbor_address: 10.1.1.203, description: SPINE3, password: { encryption: 0, key: wigwam}, remote_as: "64512", shutdown: false, update_source: loopback1 }
+    router_id: 10.1.0.6
+    shutdown: false
 ...
