@@ -2,4 +2,4 @@
 - hosts: localhost
   remote_user: root
   roles:
-    - vpc_wired
+    - vpc_physical

@@ -1,0 +1,23 @@
+---
+- name: SHUT/NO SHUT SVIS
+  hosts: all
+  gather_facts: no
+
+  vars_files:
+    - svi_vars.yml
+
+  tasks:
+  - name: TASK 1 - NO SHUTDOWN OF SVIS
+    cisco.nxos.nxos_config:
+      lines: "{{ item['action'] }}"
+      parents: interface {{ item['interface'] }}
+    loop: "{{ svis[inventory_hostname] }}"
+    when: "inventory_hostname in svis"
+    register: output
+
+  - name: OUTPUT
+    debug:
+      msg: "{{ item['commands'] }}"
+    loop: "{{ output['results'] }}"
+    when: "inventory_hostname in svis"
+...

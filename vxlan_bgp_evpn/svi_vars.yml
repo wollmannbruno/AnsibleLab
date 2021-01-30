@@ -1,0 +1,26 @@
+---
+svis:
+  leaf1:
+    - { interface: Vlan1100, action: no shutdown }
+    - { interface: Vlan1111, action: no shutdown }
+    - { interface: Vlan1121, action: no shutdown }
+    - { interface: Vlan1131, action: no shutdown }
+    - { interface: Vlan1200, action: no shutdown }
+    - { interface: Vlan1211, action: no shutdown }
+    - { interface: Vlan1221, action: no shutdown }
+    - { interface: Vlan1231, action: no shutdown }
+  leaf2:
+    - { interface: Vlan1100, action: no shutdown }
+    - { interface: Vlan1111, action: no shutdown }
+    - { interface: Vlan1121, action: no shutdown }
+    - { interface: Vlan1131, action: no shutdown }
+    - { interface: Vlan1200, action: no shutdown }
+    - { interface: Vlan1211, action: no shutdown }
+    - { interface: Vlan1221, action: no shutdown }
+    - { interface: Vlan1231, action: no shutdown }
+  leaf3:
+    - { interface: Vlan1100, action: no shutdown }
+    - { interface: Vlan1111, action: no shutdown }
+    - { interface: Vlan1121, action: no shutdown }
+    - { interface: Vlan1131, action: no shutdown }
+...
