@@ -12,10 +12,10 @@ physical_interfaces_list:
   leaf6: [Ethernet1/1, Ethernet1/2, Ethernet1/3, Ethernet1/4]
 
 interfaces_list:
-  spine1: [Loopback0, Loopback2, Ethernet1/1, Ethernet1/2, Ethernet1/3, Ethernet1/4, Ethernet1/5, Ethernet1/6]
-  spine2: [Loopback0, Loopback1, Loopback2, Ethernet1/1, Ethernet1/2, Ethernet1/3, Ethernet1/4, Ethernet1/5, Ethernet1/6]
-  spine3: [Loopback0, Loopback1, Loopback2, Ethernet1/1, Ethernet1/2, Ethernet1/3, Ethernet1/4, Ethernet1/5, Ethernet1/6]
-  spine4: [Loopback0, Loopback2, Ethernet1/1, Ethernet1/2, Ethernet1/3, Ethernet1/4, Ethernet1/5, Ethernet1/6]
+  spine1: [Loopback0, Loopback1, Ethernet1/1, Ethernet1/2, Ethernet1/3, Ethernet1/4, Ethernet1/5, Ethernet1/6]
+  spine2: [Loopback0, Loopback1, Ethernet1/1, Ethernet1/2, Ethernet1/3, Ethernet1/4, Ethernet1/5, Ethernet1/6]
+  spine3: [Loopback0, Loopback1, Ethernet1/1, Ethernet1/2, Ethernet1/3, Ethernet1/4, Ethernet1/5, Ethernet1/6]
+  spine4: [Loopback0, Loopback1, Ethernet1/1, Ethernet1/2, Ethernet1/3, Ethernet1/4, Ethernet1/5, Ethernet1/6]
   leaf1: [Loopback0, Loopback1, Ethernet1/1, Ethernet1/2, Ethernet1/3, Ethernet1/4]
   leaf2: [Loopback0, Loopback1, Ethernet1/1, Ethernet1/2, Ethernet1/3, Ethernet1/4]
   leaf3: [Loopback0, Loopback1, Ethernet1/1, Ethernet1/2, Ethernet1/3, Ethernet1/4]
@@ -31,8 +31,8 @@ interfaces_config:
     - { name: Ethernet1/4, description: LEAF4 E1/1, enabled: true, mode: layer3, mtu: "9216" }
     - { name: Ethernet1/5, description: LEAF5 E1/1, enabled: true, mode: layer3, mtu: "9216" }
     - { name: Ethernet1/6, description: LEAF6 E1/1, enabled: true, mode: layer3, mtu: "9216" }
-    - { name: Loopback0, description: P2P, enabled: true }
-    - { name: Loopback2, description: ANYCAST RP, enabled: true }
+    - { name: Loopback0, description: "ROUTER ID, IP UNNUMBERED, PIM", enabled: true }
+    - { name: Loopback1, description: ANYCAST RP, enabled: true }
   spine2:
     - { name: Ethernet1/1, description: LEAF1 E1/2, enabled: true, mode: layer3, mtu: "9216" }
     - { name: Ethernet1/2, description: LEAF2 E1/2, enabled: true, mode: layer3, mtu: "9216" }
@@ -40,9 +40,8 @@ interfaces_config:
     - { name: Ethernet1/4, description: LEAF4 E1/2, enabled: true, mode: layer3, mtu: "9216" }
     - { name: Ethernet1/5, description: LEAF5 E1/2, enabled: true, mode: layer3, mtu: "9216" }
     - { name: Ethernet1/6, description: LEAF6 E1/2, enabled: true, mode: layer3, mtu: "9216" }
-    - { name: Loopback0, description: P2P, enabled: true }
-    - { name: Loopback1, description: BGP ROUTE REFLECTOR, enabled: true }
-    - { name: Loopback2, description: ANYCAST RP, enabled: true }
+    - { name: Loopback0, description: "ROUTER ID, IP UNNUMBERED, PIM, & BGP", enabled: true }
+    - { name: Loopback1, description: ANYCAST RP, enabled: true }
   spine3:
     - { name: Ethernet1/1, description: LEAF1 E1/3, enabled: true, mode: layer3, mtu: "9216" }
     - { name: Ethernet1/2, description: LEAF2 E1/3, enabled: true, mode: layer3, mtu: "9216" }
@@ -50,9 +49,8 @@ interfaces_config:
     - { name: Ethernet1/4, description: LEAF4 E1/3, enabled: true, mode: layer3, mtu: "9216" }
     - { name: Ethernet1/5, description: LEAF5 E1/3, enabled: true, mode: layer3, mtu: "9216" }
     - { name: Ethernet1/6, description: LEAF6 E1/3, enabled: true, mode: layer3, mtu: "9216" }
-    - { name: Loopback0, description: P2P, enabled: true }
-    - { name: Loopback1, description: BGP ROUTE REFLECTOR, enabled: true }
-    - { name: Loopback2, description: ANYCAST RP, enabled: true }
+    - { name: Loopback0, description: "ROUTER ID, IP UNNUMBERED, PIM, & BGP", enabled: true }
+    - { name: Loopback1, description: ANYCAST RP, enabled: true }
   spine4:
     - { name: Ethernet1/1, description: LEAF1 E1/4, enabled: true, mode: layer3, mtu: "9216" }
     - { name: Ethernet1/2, description: LEAF2 E1/4, enabled: true, mode: layer3, mtu: "9216" }
@@ -60,66 +58,64 @@ interfaces_config:
     - { name: Ethernet1/4, description: LEAF4 E1/4, enabled: true, mode: layer3, mtu: "9216" }
     - { name: Ethernet1/5, description: LEAF5 E1/4, enabled: true, mode: layer3, mtu: "9216" }
     - { name: Ethernet1/6, description: LEAF6 E1/4, enabled: true, mode: layer3, mtu: "9216" }
-    - { name: Loopback0, description: P2P, enabled: true }
-    - { name: Loopback2, description: ANYCAST RP, enabled: true }
+    - { name: Loopback0, description: "ROUTER ID, IP UNNUMBERED, PIM", enabled: true }
+    - { name: Loopback1, description: ANYCAST RP, enabled: true }
   leaf1:
     - { name: Ethernet1/1, description: SPINE1 E1/1, enabled: true, mode: layer3, mtu: "9216" }
     - { name: Ethernet1/2, description: SPINE2 E1/1, enabled: true, mode: layer3, mtu: "9216" }
     - { name: Ethernet1/3, description: SPINE3 E1/1, enabled: true, mode: layer3, mtu: "9216" }
     - { name: Ethernet1/4, description: SPINE4 E1/1, enabled: true, mode: layer3, mtu: "9216" }
-    - { name: Loopback0, description: P2P, enabled: true }
+    - { name: Loopback0, description: "ROUTER ID, IP UNNUMBERED, PIM, & BGP", enabled: true }
     - { name: Loopback1, description: VTEP, enabled: true }
   leaf2:
     - { name: Ethernet1/1, description: SPINE1 E1/2, enabled: true, mode: layer3, mtu: "9216" }
     - { name: Ethernet1/2, description: SPINE2 E1/2, enabled: true, mode: layer3, mtu: "9216" }
     - { name: Ethernet1/3, description: SPINE3 E1/2, enabled: true, mode: layer3, mtu: "9216" }
     - { name: Ethernet1/4, description: SPINE4 E1/2, enabled: true, mode: layer3, mtu: "9216" }
-    - { name: Loopback0, description: P2P, enabled: true }
+    - { name: Loopback0, description: "ROUTER ID, IP UNNUMBERED, PIM, & BGP", enabled: true }
     - { name: Loopback1, description: VTEP, enabled: true }
   leaf3:
     - { name: Ethernet1/1, description: SPINE1 E1/3, enabled: true, mode: layer3, mtu: "9216" }
     - { name: Ethernet1/2, description: SPINE2 E1/3, enabled: true, mode: layer3, mtu: "9216" }
     - { name: Ethernet1/3, description: SPINE3 E1/3, enabled: true, mode: layer3, mtu: "9216" }
     - { name: Ethernet1/4, description: SPINE4 E1/3, enabled: true, mode: layer3, mtu: "9216" }
-    - { name: Loopback0, description: P2P, enabled: true }
+    - { name: Loopback0, description: "ROUTER ID, IP UNNUMBERED, PIM, & BGP", enabled: true }
     - { name: Loopback1, description: VTEP, enabled: true }
   leaf4:
     - { name: Ethernet1/1, description: SPINE1 E1/4, enabled: true, mode: layer3, mtu: "9216" }
     - { name: Ethernet1/2, description: SPINE2 E1/4, enabled: true, mode: layer3, mtu: "9216" }
     - { name: Ethernet1/3, description: SPINE3 E1/4, enabled: true, mode: layer3, mtu: "9216" }
     - { name: Ethernet1/4, description: SPINE4 E1/4, enabled: true, mode: layer3, mtu: "9216" }
-    - { name: Loopback0, description: P2P, enabled: true }
+    - { name: Loopback0, description: "ROUTER ID, IP UNNUMBERED, PIM, & BGP", enabled: true }
     - { name: Loopback1, description: VTEP, enabled: true }
   leaf5:
     - { name: Ethernet1/1, description: SPINE1 E1/5, enabled: true, mode: layer3, mtu: "9216" }
     - { name: Ethernet1/2, description: SPINE2 E1/5, enabled: true, mode: layer3, mtu: "9216" }
     - { name: Ethernet1/3, description: SPINE3 E1/5, enabled: true, mode: layer3, mtu: "9216" }
     - { name: Ethernet1/4, description: SPINE4 E1/5, enabled: true, mode: layer3, mtu: "9216" }
-    - { name: Loopback0, description: P2P, enabled: true }
+    - { name: Loopback0, description: "ROUTER ID, IP UNNUMBERED, PIM, & BGP", enabled: true }
     - { name: Loopback1, description: VTEP, enabled: true }
   leaf6:
     - { name: Ethernet1/1, description: SPINE1 E1/6, enabled: true, mode: layer3, mtu: "9216" }
     - { name: Ethernet1/2, description: SPINE2 E1/6, enabled: true, mode: layer3, mtu: "9216" }
     - { name: Ethernet1/3, description: SPINE3 E1/6, enabled: true, mode: layer3, mtu: "9216" }
     - { name: Ethernet1/4, description: SPINE4 E1/6, enabled: true, mode: layer3, mtu: "9216" }
-    - { name: Loopback0, description: P2P, enabled: true }
+    - { name: Loopback0, description: "ROUTER ID, IP UNNUMBERED, PIM, & BGP", enabled: true }
     - { name: Loopback1, description: VTEP, enabled: true }
 
 loopback_l3_interfaces:
   spine1:
     - { name: Loopback0, ipv4: [address: 10.1.0.201/32] }
-    - { name: Loopback2, ipv4: [address: 10.1.0.250/32] }
+    - { name: Loopback1, ipv4: [address: 10.1.0.250/32] }
   spine2:
     - { name: Loopback0, ipv4: [address: 10.1.0.202/32] }
-    - { name: Loopback1, ipv4: [address: 10.1.1.202/32] }
-    - { name: Loopback2, ipv4: [address: 10.1.0.250/32] }
+    - { name: Loopback1, ipv4: [address: 10.1.0.250/32] }
   spine3:
     - { name: Loopback0, ipv4: [address: 10.1.0.203/32] }
-    - { name: Loopback1, ipv4: [address: 10.1.1.203/32] }
-    - { name: Loopback2, ipv4: [address: 10.1.0.250/32] }
+    - { name: Loopback1, ipv4: [address: 10.1.0.250/32] }
   spine4:
     - { name: Loopback0, ipv4: [address: 10.1.0.204/32] }
-    - { name: Loopback2, ipv4: [address: 10.1.0.250/32] }
+    - { name: Loopback1, ipv4: [address: 10.1.0.250/32] }
   leaf1:
     - { name: Loopback0, ipv4: [address: 10.1.0.1/32] }
     - name: Loopback1
@@ -185,88 +181,88 @@ global_l2_mcast_group: 239.0.0.1
 bgp_asn: "64512"
 
 rr_bgp_neighbours:
-  - 10.1.1.1
-  - 10.1.1.2
-  - 10.1.1.3
-  - 10.1.1.4
-  - 10.1.1.5
-  - 10.1.1.6
+  - 10.1.0.1
+  - 10.1.0.2
+  - 10.1.0.3
+  - 10.1.0.4
+  - 10.1.0.5
+  - 10.1.0.6
 
 leaf_bgp_neighbours:
-  - 10.1.1.202
-  - 10.1.1.203
+  - 10.1.0.202
+  - 10.1.0.203
 
 bgp_global:
   spine2:
     as_number: "64512"
     log_neighbor_changes: true
     neighbors:
-      - { neighbor_address: 10.1.1.1, description: LEAF1, password: { encryption: 0, key: wigwam}, remote_as: "64512", shutdown: false, update_source: loopback1 }
-      - { neighbor_address: 10.1.1.2, description: LEAF2, password: { encryption: 0, key: wigwam}, remote_as: "64512", shutdown: false, update_source: loopback1 }
-      - { neighbor_address: 10.1.1.3, description: LEAF3, password: { encryption: 0, key: wigwam}, remote_as: "64512", shutdown: false, update_source: loopback1 }
-      - { neighbor_address: 10.1.1.4, description: LEAF4, password: { encryption: 0, key: wigwam}, remote_as: "64512", shutdown: false, update_source: loopback1 }
-      - { neighbor_address: 10.1.1.5, description: LEAF5, password: { encryption: 0, key: wigwam}, remote_as: "64512", shutdown: false, update_source: loopback1 }
-      - { neighbor_address: 10.1.1.6, description: LEAF6, password: { encryption: 0, key: wigwam}, remote_as: "64512", shutdown: false, update_source: loopback1 }
+      - { neighbor_address: 10.1.0.1, description: LEAF1, password: { encryption: 0, key: wigwam}, remote_as: "64512", shutdown: false, update_source: loopback0 }
+      - { neighbor_address: 10.1.0.2, description: LEAF2, password: { encryption: 0, key: wigwam}, remote_as: "64512", shutdown: false, update_source: loopback0 }
+      - { neighbor_address: 10.1.0.3, description: LEAF3, password: { encryption: 0, key: wigwam}, remote_as: "64512", shutdown: false, update_source: loopback0 }
+      - { neighbor_address: 10.1.0.4, description: LEAF4, password: { encryption: 0, key: wigwam}, remote_as: "64512", shutdown: false, update_source: loopback0 }
+      - { neighbor_address: 10.1.0.5, description: LEAF5, password: { encryption: 0, key: wigwam}, remote_as: "64512", shutdown: false, update_source: loopback0 }
+      - { neighbor_address: 10.1.0.6, description: LEAF6, password: { encryption: 0, key: wigwam}, remote_as: "64512", shutdown: false, update_source: loopback0 }
     router_id: 10.1.0.202
     shutdown: false
   spine3:
     as_number: "64512"
     log_neighbor_changes: true
     neighbors:
-      - { neighbor_address: 10.1.1.1, description: LEAF1, password: { encryption: 0, key: wigwam}, remote_as: "64512", shutdown: false, update_source: loopback1 }
-      - { neighbor_address: 10.1.1.2, description: LEAF2, password: { encryption: 0, key: wigwam}, remote_as: "64512", shutdown: false, update_source: loopback1 }
-      - { neighbor_address: 10.1.1.3, description: LEAF3, password: { encryption: 0, key: wigwam}, remote_as: "64512", shutdown: false, update_source: loopback1 }
-      - { neighbor_address: 10.1.1.4, description: LEAF4, password: { encryption: 0, key: wigwam}, remote_as: "64512", shutdown: false, update_source: loopback1 }
-      - { neighbor_address: 10.1.1.5, description: LEAF5, password: { encryption: 0, key: wigwam}, remote_as: "64512", shutdown: false, update_source: loopback1 }
-      - { neighbor_address: 10.1.1.6, description: LEAF6, password: { encryption: 0, key: wigwam}, remote_as: "64512", shutdown: false, update_source: loopback1 }
+      - { neighbor_address: 10.1.0.1, description: LEAF1, password: { encryption: 0, key: wigwam}, remote_as: "64512", shutdown: false, update_source: loopback0 }
+      - { neighbor_address: 10.1.0.2, description: LEAF2, password: { encryption: 0, key: wigwam}, remote_as: "64512", shutdown: false, update_source: loopback0 }
+      - { neighbor_address: 10.1.0.3, description: LEAF3, password: { encryption: 0, key: wigwam}, remote_as: "64512", shutdown: false, update_source: loopback0 }
+      - { neighbor_address: 10.1.0.4, description: LEAF4, password: { encryption: 0, key: wigwam}, remote_as: "64512", shutdown: false, update_source: loopback0 }
+      - { neighbor_address: 10.1.0.5, description: LEAF5, password: { encryption: 0, key: wigwam}, remote_as: "64512", shutdown: false, update_source: loopback0 }
+      - { neighbor_address: 10.1.0.6, description: LEAF6, password: { encryption: 0, key: wigwam}, remote_as: "64512", shutdown: false, update_source: loopback0 }
     router_id: 10.1.0.202
     shutdown: false
   leaf1:
     as_number: "64512"
     log_neighbor_changes: true
     neighbors:
-      - { neighbor_address: 10.1.1.202, description: SPINE2, password: { encryption: 0, key: wigwam}, remote_as: "64512", shutdown: false, update_source: loopback1 }
-      - { neighbor_address: 10.1.1.203, description: SPINE3, password: { encryption: 0, key: wigwam}, remote_as: "64512", shutdown: false, update_source: loopback1 }
+      - { neighbor_address: 10.1.0.202, description: SPINE2, password: { encryption: 0, key: wigwam}, remote_as: "64512", shutdown: false, update_source: loopback0 }
+      - { neighbor_address: 10.1.0.203, description: SPINE3, password: { encryption: 0, key: wigwam}, remote_as: "64512", shutdown: false, update_source: loopback0 }
     router_id: 10.1.0.1
     shutdown: false
   leaf2:
     as_number: "64512"
     log_neighbor_changes: true
     neighbors:
-      - { neighbor_address: 10.1.1.202, description: SPINE2, password: { encryption: 0, key: wigwam}, remote_as: "64512", shutdown: false, update_source: loopback1 }
-      - { neighbor_address: 10.1.1.203, description: SPINE3, password: { encryption: 0, key: wigwam}, remote_as: "64512", shutdown: false, update_source: loopback1 }
+      - { neighbor_address: 10.1.0.202, description: SPINE2, password: { encryption: 0, key: wigwam}, remote_as: "64512", shutdown: false, update_source: loopback0 }
+      - { neighbor_address: 10.1.0.203, description: SPINE3, password: { encryption: 0, key: wigwam}, remote_as: "64512", shutdown: false, update_source: loopback0 }
     router_id: 10.1.0.2
     shutdown: false
   leaf3:
     as_number: "64512"
     log_neighbor_changes: true
     neighbors:
-      - { neighbor_address: 10.1.1.202, description: SPINE2, password: { encryption: 0, key: wigwam}, remote_as: "64512", shutdown: false, update_source: loopback1 }
-      - { neighbor_address: 10.1.1.203, description: SPINE3, password: { encryption: 0, key: wigwam}, remote_as: "64512", shutdown: false, update_source: loopback1 }
+      - { neighbor_address: 10.1.0.202, description: SPINE2, password: { encryption: 0, key: wigwam}, remote_as: "64512", shutdown: false, update_source: loopback0 }
+      - { neighbor_address: 10.1.0.203, description: SPINE3, password: { encryption: 0, key: wigwam}, remote_as: "64512", shutdown: false, update_source: loopback0 }
     router_id: 10.1.0.3
     shutdown: false
   leaf4:
     as_number: "64512"
     log_neighbor_changes: true
     neighbors:
-      - { neighbor_address: 10.1.1.202, description: SPINE2, password: { encryption: 0, key: wigwam}, remote_as: "64512", shutdown: false, update_source: loopback1 }
-      - { neighbor_address: 10.1.1.203, description: SPINE3, password: { encryption: 0, key: wigwam}, remote_as: "64512", shutdown: false, update_source: loopback1 }
+      - { neighbor_address: 10.1.0.202, description: SPINE2, password: { encryption: 0, key: wigwam}, remote_as: "64512", shutdown: false, update_source: loopback0 }
+      - { neighbor_address: 10.1.0.203, description: SPINE3, password: { encryption: 0, key: wigwam}, remote_as: "64512", shutdown: false, update_source: loopback0 }
     router_id: 10.1.0.4
     shutdown: false
   leaf5:
     as_number: "64512"
     log_neighbor_changes: true
     neighbors:
-      - { neighbor_address: 10.1.1.202, description: SPINE2, password: { encryption: 0, key: wigwam}, remote_as: "64512", shutdown: false, update_source: loopback1 }
-      - { neighbor_address: 10.1.1.203, description: SPINE3, password: { encryption: 0, key: wigwam}, remote_as: "64512", shutdown: false, update_source: loopback1 }
+      - { neighbor_address: 10.1.0.202, description: SPINE2, password: { encryption: 0, key: wigwam}, remote_as: "64512", shutdown: false, update_source: loopback0 }
+      - { neighbor_address: 10.1.0.203, description: SPINE3, password: { encryption: 0, key: wigwam}, remote_as: "64512", shutdown: false, update_source: loopback0 }
     router_id: 10.1.0.5
     shutdown: false
   leaf6:
     as_number: "64512"
     log_neighbor_changes: true
     neighbors:
-      - { neighbor_address: 10.1.1.202, description: SPINE2, password: { encryption: 0, key: wigwam}, remote_as: "64512", shutdown: false, update_source: loopback1 }
-      - { neighbor_address: 10.1.1.203, description: SPINE3, password: { encryption: 0, key: wigwam}, remote_as: "64512", shutdown: false, update_source: loopback1 }
+      - { neighbor_address: 10.1.0.202, description: SPINE2, password: { encryption: 0, key: wigwam}, remote_as: "64512", shutdown: false, update_source: loopback0 }
+      - { neighbor_address: 10.1.0.203, description: SPINE3, password: { encryption: 0, key: wigwam}, remote_as: "64512", shutdown: false, update_source: loopback0 }
     router_id: 10.1.0.6
     shutdown: false
 ...
