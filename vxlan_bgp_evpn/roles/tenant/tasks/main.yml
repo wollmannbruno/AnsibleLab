@@ -16,19 +16,24 @@
     aggregate: "{{ tenant_vrfs[inventory_hostname] }}"
   when: "inventory_hostname in tenant_vrfs"
 
-- name: TASK 4 - ADD IPV4 UNICAST ADDRESS-FAMILY TO EACH TENANT VRF
-  cisco.nxos.nxos_vrf_af:
-    afi: "{{ item['afi'] }}"
-    vrf: "{{ item['vrf'] }}"
-  loop: "{{ tenant_vrfs_afi[inventory_hostname] }}"
-  when: "inventory_hostname in tenant_vrfs_afi"
+# - name: TASK 4 - ADD IPV4 UNICAST ADDRESS-FAMILY TO EACH TENANT VRF
+#   cisco.nxos.nxos_vrf_af:
+#     afi: "{{ item['afi'] }}"
+#     vrf: "{{ item['vrf'] }}"
+#   loop: "{{ tenant_vrfs_afi[inventory_hostname] }}"
+#   when: "inventory_hostname in tenant_vrfs_afi"
 
-- name: TASK 5 - ASSIGN CORE-FACING INTERFACE TO EACH TENANT VRF
+- name: TASK 4 - ASSIGN CORE-FACING INTERFACE TO EACH TENANT VRF
   cisco.nxos.nxos_vrf_interface:
     interface: "{{ item['interface'] }}"
     vrf: "{{ item['vrf'] }}"
   loop: "{{ core_facing_svi_vrf[inventory_hostname] }}"
   when: "inventory_hostname in core_facing_svi_vrf"
+
+- name: TASK 5 - DISABLE IP REDIRECTS ON CORE-FACING INTERFACE
+  cisco.nxos.nxos_l3_interfaces:
+    config: "{{ core_facing_svi_l3[inventory_hostname] }}"
+  when: "inventory_hostname in core_facing_svi_l3"
 
 - name: TASK 6 - CREATE SERVICE VLANS
   cisco.nxos.nxos_vlans:

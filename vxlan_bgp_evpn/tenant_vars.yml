@@ -11,23 +11,23 @@ overlay_vrf_vlans:
 
 core_facing_svi:
   leaf1:
-    - { name: vlan1100, description: CORE-FACING SVI FOR PROD TENANT, enabled: true, ip_forward: true }
-    - { name: vlan1200, description: CORE-FACING SVI FOR NPRD TENANT, enabled: true, ip_forward: true }
+    - { name: vlan1100, description: CORE-FACING SVI FOR PROD TENANT, enabled: true, mtu: "9216", ip_forward: true }
+    - { name: vlan1200, description: CORE-FACING SVI FOR NPRD TENANT, enabled: true, mtu: "9216", ip_forward: true }
   leaf2:
-    - { name: vlan1100, description: CORE-FACING SVI FOR PROD TENANT, enabled: true, ip_forward: true }
-    - { name: vlan1200, description: CORE-FACING SVI FOR NPRD TENANT, enabled: true, ip_forward: true }
+    - { name: vlan1100, description: CORE-FACING SVI FOR PROD TENANT, enabled: true, mtu: "9216", ip_forward: true }
+    - { name: vlan1200, description: CORE-FACING SVI FOR NPRD TENANT, enabled: true, mtu: "9216", ip_forward: true }
   leaf3:
-    - { name: vlan1100, description: CORE-FACING SVI FOR PROD TENANT, enabled: true, ip_forward: true }
+    - { name: vlan1100, description: CORE-FACING SVI FOR PROD TENANT, enabled: true, mtu: "9216", ip_forward: true }
 
 tenant_vrfs:
   leaf1:
-    - { name: PROD, rd: auto, vni: "301100" }
-    - { name: NPRD, rd: auto, vni: "301200" }
+    - { name: PROD, vni: "301100" }
+    - { name: NPRD, vni: "301200" }
   leaf2:
-    - { name: PROD, rd: auto, vni: "301100" }
-    - { name: NPRD, rd: auto, vni: "301200" }
+    - { name: PROD, vni: "301100" }
+    - { name: NPRD, vni: "301200" }
   leaf3:
-    - { name: PROD, rd: auto, vni: "301100" }
+    - { name: PROD, vni: "301100" }
 
 tenant_vrfs_afi:
   leaf1:
@@ -48,6 +48,16 @@ core_facing_svi_vrf:
     - { interface: vlan1200, vrf: NPRD }
   leaf3:
     - { interface: vlan1100, vrf: PROD }
+
+core_facing_svi_l3:
+  leaf1:
+    - { name: vlan1100, redirects: false}
+    - { name: vlan1200, redirects: false}
+  leaf2:
+    - { name: vlan1100, redirects: false}
+    - { name: vlan1200, redirects: false}
+  leaf3:
+    - { name: vlan1100, redirects: false}
 
 service_vlans:
   leaf1:

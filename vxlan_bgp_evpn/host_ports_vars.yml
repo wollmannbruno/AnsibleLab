@@ -1,0 +1,19 @@
+---
+interfaces:
+  leaf1:
+    - { name: Ethernet1/7, mtu: "9216", description: HOST1, enabled: true, mode: layer2 }
+  leaf2:
+    - { name: Ethernet1/7, mtu: "9216", description: HOST2, enabled: true, mode: layer2 }
+  leaf3:
+    - { name: Ethernet1/5, mtu: "9216", description: HOST3, enabled: true, mode: layer2 }
+    - { name: Ethernet1/6, mtu: "9216", description: HOST4, enabled: true, mode: layer2 }
+
+interfaces_l2:
+  leaf1:
+    - { name: Ethernet1/7, access: { vlan: 1111 }, mode: access }
+  leaf2:
+    - { name: Ethernet1/7, access: { vlan: 1121 }, mode: access }
+  leaf3:
+    - { name: Ethernet1/5, access: { vlan: 1111 }, mode: access }
+    - { name: Ethernet1/6, access: { vlan: 1121 }, mode: access }
+...

@@ -1,0 +1,19 @@
+---
+- name: SHUT/NO SHUT SVIS
+  hosts: leafs
+  gather_facts: no
+
+  vars_files:
+    - host_ports_vars.yml
+
+  tasks:
+  - name: TASK 1 - ENABLE INTERFACES
+    cisco.nxos.nxos_interfaces:
+      config: "{{ interfaces[inventory_hostname] }}"
+    when: "inventory_hostname in interfaces"
+
+  - name: TASK 2 - CONFIGURE L2 SETTINGS
+    cisco.nxos.nxos_l2_interfaces:
+      config: "{{ interfaces_l2[inventory_hostname] }}"
+    when: "inventory_hostname in interfaces_l2"
+...
