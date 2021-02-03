@@ -1,8 +1,8 @@
 ---
 overlay_vrf_vlans:
   leaf1:
-    - { name: NPRD_OVERLAY, vlan_id: "1200", mapped_vni: "301200" }
     - { name: PROD_OVERLAY, vlan_id: "1100", mapped_vni: "301100" }
+    - { name: NPRD_OVERLAY, vlan_id: "1200", mapped_vni: "301200" }
   leaf2:
     - { name: PROD_OVERLAY, vlan_id: "1100", mapped_vni: "301100" }
     - { name: NPRD_OVERLAY, vlan_id: "1200", mapped_vni: "301200" }

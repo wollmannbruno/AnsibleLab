@@ -215,7 +215,7 @@ bgp_global:
       - { neighbor_address: 10.1.0.4, description: LEAF4, password: { encryption: 0, key: wigwam}, remote_as: "64512", shutdown: false, update_source: loopback0 }
       - { neighbor_address: 10.1.0.5, description: LEAF5, password: { encryption: 0, key: wigwam}, remote_as: "64512", shutdown: false, update_source: loopback0 }
       - { neighbor_address: 10.1.0.6, description: LEAF6, password: { encryption: 0, key: wigwam}, remote_as: "64512", shutdown: false, update_source: loopback0 }
-    router_id: 10.1.0.202
+    router_id: 10.1.0.203
     shutdown: false
   leaf1:
     as_number: "64512"

@@ -7,10 +7,10 @@
     - tenant_vars.yml
 
   tasks:
-  - name: test
-    cisco.nxos.nxos_bgp_global:
-      config: "{{ bgp_global[inventory_hostname] }}"
-    when: "inventory_hostname in bgp_global"
+  - name: TASK 7 - CREATE SVI INTERFACES
+    cisco.nxos.nxos_interfaces:
+      config: "{{ svi_interfaces[inventory_hostname] }}"
+    when: "inventory_hostname in svi_interfaces"
     register: output
 
   - name: OUTPUT
@@ -20,5 +20,5 @@
       # msg: "{{ item['commands'] }}"
     # loop: "{{ output['results'] }}"
     # when: "'leafs' in group_names"
-    when: "inventory_hostname in bgp_global"
+    when: "inventory_hostname in svi_interfaces"
 ...
