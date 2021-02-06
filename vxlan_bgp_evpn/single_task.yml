@@ -3,14 +3,15 @@
   hosts: all
   gather_facts: no
   vars_files:
+    - vpc_phys_vars.yml
     - topology_vars.yml
     - tenant_vars.yml
 
   tasks:
-  - name: TASK 7 - CREATE SVI INTERFACES
-    cisco.nxos.nxos_interfaces:
-      config: "{{ svi_interfaces[inventory_hostname] }}"
-    when: "inventory_hostname in svi_interfaces"
+  - name: TASK 3 - CREATE PORT-CHANNEL FOR PEER-LINK
+    cisco.nxos.nxos_lag_interfaces:
+      config: "{{ vpc_lag_interfaces[inventory_hostname] }}"
+    when: "inventory_hostname in vpc_lag_interfaces"
     register: output
 
   - name: OUTPUT
@@ -20,5 +21,5 @@
       # msg: "{{ item['commands'] }}"
     # loop: "{{ output['results'] }}"
     # when: "'leafs' in group_names"
-    when: "inventory_hostname in svi_interfaces"
+    when: "inventory_hostname in vpc_lag_interfaces"
 ...

@@ -1,0 +1,89 @@
+---
+vpc_interfaces:
+  leaf1:
+    - { name: Ethernet1/5, description: PEER-LINK, enabled: true, mode: layer2 }
+    - { name: Ethernet1/6, description: PEER-LINK, enabled: true, mode: layer2 }
+    - { name: Ethernet1/8, description: PKA, enabled: true, mode: layer3 }
+  leaf2:
+    - { name: Ethernet1/5, description: PEER-LINK, enabled: true, mode: layer2 }
+    - { name: Ethernet1/6, description: PEER-LINK, enabled: true, mode: layer2 }
+    - { name: Ethernet1/8, description: PKA, enabled: true, mode: layer3 }
+
+vpc_lag_interfaces:
+  leaf1:
+    - name: port-channel5
+      members:
+      - { member: Ethernet1/5, mode: "on" }
+      - { member: Ethernet1/6, mode: "on" }
+  leaf2:
+    - name: port-channel5
+      members:
+      - { member: Ethernet1/5, mode: "on" }
+      - { member: Ethernet1/6, mode: "on" }
+
+vpc_peerlink_interface:
+  leaf1:
+    - { name: port-channel5, description: PEER-LINK }
+  leaf2:
+    - { name: port-channel5, description: PEER-LINK }
+
+vpc_peerlink_l2_interface:
+  leaf1:
+    - { name: port-channel5, mode: trunk }
+  leaf2:
+    - { name: port-channel5, mode: trunk }
+
+vpc_interface:
+  leaf1:
+    portchannel: "5"
+    peer_link: true
+    vpc: "5"
+  leaf2:
+    portchannel: "5"
+    peer_link: true
+    vpc: "5"
+
+pka_vrf:
+  leaf1:
+    name: PKA
+    description: PEER KEEP-ALIVE
+    interfaces:
+    - Ethernet1/8
+  leaf2:
+    name: PKA
+    description: PEER KEEP-ALIVE
+    interfaces:
+    - Ethernet1/8
+
+pka_vrf_af:
+  leaf1:
+    vrf: PKA
+    afi: ipv4
+  leaf2:
+    vrf: PKA
+    afi: ipv4
+
+pka_l3_interface:
+  leaf1:
+    - { name: Ethernet1/8, ipv4: [address: 1.1.1.1/30] }
+  leaf2:
+    - { name: Ethernet1/8, ipv4: [address: 1.1.1.2/30] }
+
+vpc:
+  leaf1:
+    domain: "1"
+    peer_gw: true
+    pkl_dest: "1.1.1.2"
+    pkl_src: "1.1.1.1"
+    pkl_vrf: PKA
+    role_priority: "1"
+    system_priority: "1"
+  leaf2:
+    domain: "1"
+    peer_gw: true
+    pkl_dest: "1.1.1.1"
+    pkl_src: "1.1.1.2"
+    pkl_vrf: PKA
+    role_priority: "2"
+    system_priority: "1"
+...
