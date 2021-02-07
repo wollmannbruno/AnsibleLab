@@ -59,6 +59,16 @@ core_facing_svi_l3:
   leaf3:
     - { name: vlan1100, redirects: false}
 
+assoc_vrf:
+  leaf1:
+    - { vni: "301100", assoc_vrf: true }
+    - { vni: "301200", assoc_vrf: true }
+  leaf2:
+    - { vni: "301100", assoc_vrf: true }
+    - { vni: "301200", assoc_vrf: true }
+  leaf3:
+    - { vni: "301100", assoc_vrf: true }
+
 service_vlans:
   leaf1:
     - { name: PROD_WEB, vlan_id: "1111", mapped_vni: "201111" }

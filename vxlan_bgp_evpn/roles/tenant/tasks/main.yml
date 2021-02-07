@@ -1,70 +1,81 @@
 ---
 # tasks file for tenant
 
-- name: TASK 1 - CREATE AN OVERLAY VLAN FOR EACH TENANT VRF
+- name: TASK 1/14 - CREATE AN OVERLAY VLAN FOR EACH TENANT VRF
   cisco.nxos.nxos_vlans:
     config: "{{ overlay_vrf_vlans[inventory_hostname] }}"
   when: "inventory_hostname in overlay_vrf_vlans"
 
-- name: TASK 2 - CREATE CORE-FACING INTERFACE FOR EACH TENANT VRF
+- name: TASK 2/14 - CREATE CORE-FACING INTERFACE FOR EACH TENANT VRF
   cisco.nxos.nxos_interfaces:
     config: "{{ core_facing_svi[inventory_hostname] }}"
   when: "inventory_hostname in core_facing_svi"
 
-- name: TASK 3 - CREATE TENANT VRFS
+- name: TASK 3/14 - CREATE TENANT VRFS
   cisco.nxos.nxos_vrf:
     aggregate: "{{ tenant_vrfs[inventory_hostname] }}"
   when: "inventory_hostname in tenant_vrfs"
 
-# - name: TASK 4 - ADD IPV4 UNICAST ADDRESS-FAMILY TO EACH TENANT VRF
-#   cisco.nxos.nxos_vrf_af:
-#     afi: "{{ item['afi'] }}"
-#     vrf: "{{ item['vrf'] }}"
-#   loop: "{{ tenant_vrfs_afi[inventory_hostname] }}"
-#   when: "inventory_hostname in tenant_vrfs_afi"
-
-- name: TASK 4 - ASSIGN CORE-FACING INTERFACE TO EACH TENANT VRF
+- name: TASK 4/14 - ASSIGN CORE-FACING INTERFACE TO EACH TENANT VRF
   cisco.nxos.nxos_vrf_interface:
     interface: "{{ item['interface'] }}"
     vrf: "{{ item['vrf'] }}"
   loop: "{{ core_facing_svi_vrf[inventory_hostname] }}"
   when: "inventory_hostname in core_facing_svi_vrf"
 
-- name: TASK 5 - DISABLE IP REDIRECTS ON CORE-FACING INTERFACE
+- name: TASK 5/14 - CREATE CORE-FACING INTERFACE FOR EACH TENANT VRF
+  cisco.nxos.nxos_interfaces:
+    config: "{{ core_facing_svi[inventory_hostname] }}"
+  when: "inventory_hostname in core_facing_svi"
+
+- name: TASK 6/14 - DISABLE IP REDIRECTS ON CORE-FACING INTERFACE
   cisco.nxos.nxos_l3_interfaces:
     config: "{{ core_facing_svi_l3[inventory_hostname] }}"
   when: "inventory_hostname in core_facing_svi_l3"
 
-- name: TASK 6 - CREATE SERVICE VLANS
+- name: TASK 7/14 - ASSOCIATE L3 VNI TO VRF IN THE VTEP INTERFACE
+  cisco.nxos.nxos_vxlan_vtep_vni:
+    interface: nve1
+    vni: "{{ item['vni'] }}"
+    assoc_vrf: "{{ item['assoc_vrf'] }}"
+  loop: "{{ assoc_vrf[inventory_hostname] }}"
+  when: "inventory_hostname in assoc_vrf"
+
+- name: TASK 8/14 - CREATE SERVICE VLANS
   cisco.nxos.nxos_vlans:
     config: "{{ service_vlans[inventory_hostname] }}"
   when: "inventory_hostname in service_vlans"
 
-- name: TASK 7 - CREATE SVI INTERFACES
+- name: TASK 9/14 - CREATE SVI INTERFACES
   cisco.nxos.nxos_interfaces:
     config: "{{ svi_interfaces[inventory_hostname] }}"
   when: "inventory_hostname in svi_interfaces"
 
-- name: TASK 8 - SET VRF FOR EACH SVI
+- name: TASK 10/14 - SET VRF FOR EACH SVI
   cisco.nxos.nxos_vrf_interface:
     interface: "{{ item['interface'] }}"
     vrf: "{{ item['vrf'] }}"
   loop: "{{ svi_vrf[inventory_hostname] }}"
   when: "inventory_hostname in svi_vrf"
 
-- name: TASK 9 - ASSIGN IP ADDRESS TO EACH SVI
+- name: TASK 11/14 - ASSIGN IP ADDRESS TO EACH SVI
   cisco.nxos.nxos_l3_interfaces:
     config: "{{ svi_l3[inventory_hostname] }}"
   when: "inventory_hostname in svi_l3"
 
-- name: TASK 10 - ADD L2 VNI TO THE VTEP INTERFACE
+- name: TASK 12/14 - CREATE SVI INTERFACES
+  cisco.nxos.nxos_interfaces:
+    config: "{{ svi_interfaces[inventory_hostname] }}"
+  when: "inventory_hostname in svi_interfaces"
+
+- name: TASK 13/14 - ADD L2 VNI TO THE VTEP INTERFACE
   cisco.nxos.nxos_vxlan_vtep_vni:
     interface: nve1
     vni: "{{ item }}"
   loop: "{{ member_vnis[inventory_hostname] }}"
   when: "inventory_hostname in member_vnis"
 
-- name: TASK 11 - ADD SERVICE NETWORKS TO BGP
+- name: TASK 14/14 - ADD SERVICE NETWORKS TO BGP
   cisco.nxos.nxos_bgp_af:
     asn: "{{ bgp_asn }}"
     afi: ipv4

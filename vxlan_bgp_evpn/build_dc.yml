@@ -4,13 +4,13 @@
   gather_facts: no
 
   vars_files:
-    - vpc_phys_vars.yml
-    - topology_vars.yml
     - tenant_vars.yml
+    - topology_vars.yml
+    - vpc_phys_vars.yml
 
   roles:
     - underlay
-    - vpc_physical
+    # - vpc_physical
     - overlay
     - tenant
 ...

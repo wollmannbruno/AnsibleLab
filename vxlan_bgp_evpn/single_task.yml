@@ -8,18 +8,21 @@
     - tenant_vars.yml
 
   tasks:
-  - name: TASK 3 - CREATE PORT-CHANNEL FOR PEER-LINK
-    cisco.nxos.nxos_lag_interfaces:
-      config: "{{ vpc_lag_interfaces[inventory_hostname] }}"
-    when: "inventory_hostname in vpc_lag_interfaces"
+  - name: TASK 10 - ASSOCIATE L3 VNI TO VRF IN THE VTEP INTERFACE
+    cisco.nxos.nxos_vxlan_vtep_vni:
+      interface: nve1
+      vni: "{{ item['vni'] }}"
+      assoc_vrf: "{{ item['assoc_vrf'] }}"
+    loop: "{{ assoc_vrf[inventory_hostname] }}"
+    when: "inventory_hostname in assoc_vrf"
     register: output
 
   - name: OUTPUT
     debug:
       # msg: "{{ output }}"
-      msg: "{{ output['commands'] }}"
-      # msg: "{{ item['commands'] }}"
-    # loop: "{{ output['results'] }}"
+      # msg: "{{ output['commands'] }}"
+      msg: "{{ item['commands'] }}"
+    loop: "{{ output['results'] }}"
     # when: "'leafs' in group_names"
-    when: "inventory_hostname in vpc_lag_interfaces"
+    when: "inventory_hostname in assoc_vrf"
 ...

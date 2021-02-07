@@ -1,23 +1,23 @@
 ---
 # tasks file for underlay
 
-- name: TASK 1 - ENABLE FEATURES
+- name: TASK 1/9 - ENABLE FEATURES
   cisco.nxos.nxos_feature:
     feature: "{{ item }}"
     state: enabled
   loop: [ospf, pim]
 
-- name: TASK 2 - CONFIGURE AND ENABLE ETHERNET AND LOOPBACK INTERFACES
+- name: TASK 2/9 - CONFIGURE AND ENABLE ETHERNET AND LOOPBACK INTERFACES
   cisco.nxos.nxos_interfaces:
     config: "{{ interfaces_config[inventory_hostname] }}"
     state: merged
 
-- name: TASK 3 - L3 CONFIGURATION OF LOOPBACK INTERFACES
+- name: TASK 3/9 - L3 CONFIGURATION OF LOOPBACK INTERFACES
   cisco.nxos.nxos_l3_interfaces:
     config: "{{ loopback_l3_interfaces[inventory_hostname] }}"
     state: merged
 
-- name: TASK 4 - IP UNNUMBERED ETHERNET INTERFACES
+- name: TASK 4/9 - IP UNNUMBERED ETHERNET INTERFACES
   cisco.nxos.nxos_config:
     lines:
       - medium p2p
@@ -25,7 +25,7 @@
     parents: interface {{ item }}
   loop: "{{ physical_interfaces_list[inventory_hostname] }}"
 
-- name: TASK 5 - CONFIGURE OSPF PROCESS
+- name: TASK 5/9 - CONFIGURE OSPF PROCESS
   cisco.nxos.nxos_ospfv2:
     config:
       processes:
@@ -38,7 +38,7 @@
             # set: yes
     state: merged
 
-- name: TASK 6 - CONFIGURE INTERFACES WITH OSPF
+- name: TASK 6/9 - CONFIGURE INTERFACES WITH OSPF
   cisco.nxos.nxos_ospf_interfaces:
     config:
       - name: "{{ item }}"
@@ -57,19 +57,19 @@
     state: merged
   loop: "{{ interfaces_list[inventory_hostname] }}"
 
-- name: TASK 7 - ENABLE PIM SPARSE MODE ON INTERFACES
+- name: TASK 7/9 - ENABLE PIM SPARSE MODE ON INTERFACES
   cisco.nxos.nxos_pim_interface:
     interface: "{{ item }}"
     sparse: yes
     state: present
   loop: "{{ interfaces_list[inventory_hostname] }}"
 
-- name: TASK 8 - CONFIGURE PIM RP ADDRESS
+- name: TASK 8/9 - CONFIGURE PIM RP ADDRESS
   cisco.nxos.nxos_pim_rp_address:
     rp_address: "{{ rp_address }}"
     state: present
 
-- name: TASK 9 - CONFIGURE SPINES WITH PIM ANYCAST RPS
+- name: TASK 9/9 - CONFIGURE SPINES WITH PIM ANYCAST RPS
   cisco.nxos.nxos_config:
     lines:
       - ip pim anycast-rp {{ rp_address }} {{ item }}
