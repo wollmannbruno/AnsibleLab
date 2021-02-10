@@ -9,8 +9,8 @@
     - vpc_phys_vars.yml
 
   roles:
+    - vpc_physical
     - underlay
-    # - vpc_physical
     - overlay
     - tenant
 ...
