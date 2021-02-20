@@ -53,7 +53,7 @@
           - process_id: UNDERLAY
             area:
               area_id: 0.0.0.0
-              secondaries: no
+              secondaries: yes
     state: merged
   loop: "{{ interfaces_list[inventory_hostname] }}"
 

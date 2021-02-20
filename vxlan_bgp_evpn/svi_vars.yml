@@ -23,4 +23,9 @@ svis:
     - { interface: Vlan1111, action: no shutdown }
     - { interface: Vlan1121, action: no shutdown }
     - { interface: Vlan1131, action: no shutdown }
+  leaf5:
+    - { interface: Vlan1100, action: no shutdown }
+    - { interface: Vlan1111, action: no shutdown }
+    - { interface: Vlan1121, action: no shutdown }
+    - { interface: Vlan1131, action: no shutdown }
 ...

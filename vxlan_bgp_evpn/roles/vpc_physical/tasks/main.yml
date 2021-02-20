@@ -1,57 +1,52 @@
 ---
 # tasks file for vpc_physical
 
-- name: TASK 1 - ENABLE FEATURE VPC
+- name: TASK 1/10 - ENABLE FEATURE VPC
   cisco.nxos.nxos_feature:
     feature: "{{ item }}"
   loop: [lacp, vpc]
   when: "inventory_hostname in vpc_interfaces"
 
-- name: TASK 2 - ENABLE PEER-LINK AND PKA INTERFACES
+- name: TASK 2/10 - ENABLE PEER-LINK AND PKA INTERFACES
   cisco.nxos.nxos_interfaces:
     config: "{{ vpc_interfaces[inventory_hostname] }}"
   when: "inventory_hostname in vpc_interfaces"
 
-- name: TASK 3 - CREATE PORT-CHANNEL FOR PEER-LINK
+- name: TASK 3/10 - CREATE PORT-CHANNEL FOR PEER-LINK
   cisco.nxos.nxos_lag_interfaces:
     config: "{{ vpc_lag_interfaces[inventory_hostname] }}"
   when: "inventory_hostname in vpc_lag_interfaces"
   register: output
 
-- name: TASK 4 - ADD DESCRIPTION TO PEER-LINK INTERFACE
+- name: TASK 4/10 - ADD DESCRIPTION TO PEER-LINK INTERFACE
   cisco.nxos.nxos_interfaces:
     config: "{{ vpc_peerlink_interface[inventory_hostname] }}"
   when: "inventory_hostname in vpc_peerlink_interface"
 
-- name: TASK 5 - SET PEER-LINK TO TRUNK MODE
+- name: TASK 5/10 - SET PEER-LINK TO TRUNK MODE
   cisco.nxos.nxos_l2_interfaces:
     config: "{{ vpc_peerlink_l2_interface[inventory_hostname] }}"
   when: "inventory_hostname in vpc_peerlink_l2_interface"
 
-- name: TASK 6 - CREATE VRF FOR PEER KEEP-ALIVE
+- name: TASK 6/10 - CREATE VRF FOR PEER KEEP-ALIVE
   cisco.nxos.nxos_vrf:
     name: "{{ pka_vrf[inventory_hostname]['name'] }}"
     description: "{{ pka_vrf[inventory_hostname]['description'] }}"
     interfaces: "{{ pka_vrf[inventory_hostname]['interfaces'] }}"
   when: "inventory_hostname in pka_vrf"
 
-- name: TASK 7 - SET IPV4 ADDRESS-FAMILY IN PKA VRF
+- name: TASK 7/10 - SET IPV4 ADDRESS-FAMILY IN PKA VRF
   cisco.nxos.nxos_vrf_af:
     vrf: "{{ pka_vrf_af[inventory_hostname]['vrf'] }}"
     afi: "{{ pka_vrf_af[inventory_hostname]['afi'] }}"
   when: "inventory_hostname in pka_vrf_af"
 
-- name: TASK 8 - SET IPV4 ADDRESS ON PEER KEEP-ALIVE INTERFACE
+- name: TASK 8/10 - SET IPV4 ADDRESS ON PEER KEEP-ALIVE INTERFACE
   cisco.nxos.nxos_l3_interfaces:
     config: "{{ pka_l3_interface[inventory_hostname] }}"
   when: "inventory_hostname in pka_l3_interface"
 
-- name: PAUSE BEFORE CREATING VPC DOMAIN
-  pause:
-    seconds: "15"
-    prompt: PAUSE
-
-- name: TASK 9 - CONFIGURE VPC DOMAIN
+- name: TASK 9/10 - CONFIGURE VPC DOMAIN
   cisco.nxos.nxos_vpc:
     domain: "{{ vpc[inventory_hostname]['domain']}}"
     peer_gw: "{{ vpc[inventory_hostname]['peer_gw']}}"
@@ -61,7 +56,7 @@
     role_priority: "{{ vpc[inventory_hostname]['role_priority']}}"
   when: "inventory_hostname in vpc"
 
-- name: TASK 10 - SET PORT-CHANNEL TO VPC PEER-LINK
+- name: TASK 10/10 - SET PORT-CHANNEL TO VPC PEER-LINK
   cisco.nxos.nxos_vpc_interface:
     portchannel: "{{ vpc_interface[inventory_hostname]['portchannel'] }}"
     peer_link: "{{ vpc_interface[inventory_hostname]['peer_link'] }}"

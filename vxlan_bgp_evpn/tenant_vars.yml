@@ -8,6 +8,8 @@ overlay_vrf_vlans:
     - { name: NPRD_OVERLAY, vlan_id: "1200", mapped_vni: "301200" }
   leaf3:
     - { name: PROD_OVERLAY, vlan_id: "1100", mapped_vni: "301100" }
+  leaf5:
+    - { name: PROD_OVERLAY, vlan_id: "1100", mapped_vni: "301100" }
 
 core_facing_svi:
   leaf1:
@@ -17,6 +19,8 @@ core_facing_svi:
     - { name: vlan1100, description: CORE-FACING SVI FOR PROD TENANT, enabled: true, mtu: "9216", ip_forward: true }
     - { name: vlan1200, description: CORE-FACING SVI FOR NPRD TENANT, enabled: true, mtu: "9216", ip_forward: true }
   leaf3:
+    - { name: vlan1100, description: CORE-FACING SVI FOR PROD TENANT, enabled: true, mtu: "9216", ip_forward: true }
+  leaf5:
     - { name: vlan1100, description: CORE-FACING SVI FOR PROD TENANT, enabled: true, mtu: "9216", ip_forward: true }
 
 tenant_vrfs:
@@ -28,6 +32,8 @@ tenant_vrfs:
     - { name: NPRD, vni: "301200" }
   leaf3:
     - { name: PROD, vni: "301100" }
+  leaf5:
+    - { name: PROD, vni: "301100" }
 
 tenant_vrfs_afi:
   leaf1:
@@ -37,6 +43,8 @@ tenant_vrfs_afi:
     - { vrf: PROD, afi: ipv4 }
     - { vrf: NPRD, afi: ipv4 }
   leaf3:
+    - { vrf: PROD, afi: ipv4 }
+  leaf5:
     - { vrf: PROD, afi: ipv4 }
 
 core_facing_svi_vrf:
@@ -48,6 +56,8 @@ core_facing_svi_vrf:
     - { interface: vlan1200, vrf: NPRD }
   leaf3:
     - { interface: vlan1100, vrf: PROD }
+  leaf5:
+    - { interface: vlan1100, vrf: PROD }
 
 core_facing_svi_l3:
   leaf1:
@@ -58,6 +68,8 @@ core_facing_svi_l3:
     - { name: vlan1200, redirects: false}
   leaf3:
     - { name: vlan1100, redirects: false}
+  leaf5:
+    - { name: vlan1100, redirects: false}
 
 assoc_vrf:
   leaf1:
@@ -67,6 +79,8 @@ assoc_vrf:
     - { vni: "301100", assoc_vrf: true }
     - { vni: "301200", assoc_vrf: true }
   leaf3:
+    - { vni: "301100", assoc_vrf: true }
+  leaf5:
     - { vni: "301100", assoc_vrf: true }
 
 service_vlans:
@@ -85,6 +99,10 @@ service_vlans:
     - { name: NPRD_APP, vlan_id: "1221", mapped_vni: "201221" }
     - { name: NPRD_DB, vlan_id: "1231", mapped_vni: "201231" }
   leaf3:
+    - { name: PROD_WEB, vlan_id: "1111", mapped_vni: "201111" }
+    - { name: PROD_APP, vlan_id: "1121", mapped_vni: "201121" }
+    - { name: PROD_DB, vlan_id: "1131", mapped_vni: "201131" }
+  leaf5:
     - { name: PROD_WEB, vlan_id: "1111", mapped_vni: "201111" }
     - { name: PROD_APP, vlan_id: "1121", mapped_vni: "201121" }
     - { name: PROD_DB, vlan_id: "1131", mapped_vni: "201131" }
@@ -108,6 +126,10 @@ svi_interfaces:
     - { name: vlan1111, description: PROD_WEB, enabled: true, mtu: "9216", fabric_forwarding_anycast_gateway: true }
     - { name: vlan1121, description: PROD_APP, enabled: true, mtu: "9216", fabric_forwarding_anycast_gateway: true }
     - { name: vlan1131, description: PROD_DB, enabled: true, mtu: "9216", fabric_forwarding_anycast_gateway: true }
+  leaf5:
+    - { name: vlan1111, description: PROD_WEB, enabled: true, mtu: "9216", fabric_forwarding_anycast_gateway: true }
+    - { name: vlan1121, description: PROD_APP, enabled: true, mtu: "9216", fabric_forwarding_anycast_gateway: true }
+    - { name: vlan1131, description: PROD_DB, enabled: true, mtu: "9216", fabric_forwarding_anycast_gateway: true }
 
 svi_vrf:
   leaf1:
@@ -125,6 +147,10 @@ svi_vrf:
     - { interface: Vlan1221, vrf: NPRD }
     - { interface: Vlan1231, vrf: NPRD }
   leaf3:
+    - { interface: Vlan1111, vrf: PROD }
+    - { interface: Vlan1121, vrf: PROD }
+    - { interface: Vlan1131, vrf: PROD }
+  leaf5:
     - { interface: Vlan1111, vrf: PROD }
     - { interface: Vlan1121, vrf: PROD }
     - { interface: Vlan1131, vrf: PROD }
@@ -148,6 +174,10 @@ svi_l3:
     - { name: vlan1111, ipv4: [address: 10.100.0.1/24] }
     - { name: vlan1121, ipv4: [address: 10.100.1.1/24] }
     - { name: vlan1131, ipv4: [address: 10.100.2.1/24] }
+  leaf5:
+    - { name: vlan1111, ipv4: [address: 10.100.0.1/24] }
+    - { name: vlan1121, ipv4: [address: 10.100.1.1/24] }
+    - { name: vlan1131, ipv4: [address: 10.100.2.1/24] }
 
 member_vnis:
   leaf1:
@@ -168,6 +198,10 @@ member_vnis:
     - "201111"
     - "201121"
     - "201131"
+  leaf5:
+    - "201111"
+    - "201121"
+    - "201131"
 
 bgp_vrf:
   leaf1:
@@ -177,5 +211,7 @@ bgp_vrf:
     - { vrf: PROD, networks: [["10.100.0.0/24"], ["10.100.1.0/24"], ["10.100.2.0/24"]]}
     - { vrf: NPRD, networks: [["10.100.16.0/24"], ["10.100.17.0/24"] , ["10.100.18.0/24"]]}
   leaf3:
+    - { vrf: PROD, networks: [["10.100.0.0/24"], ["10.100.1.0/24"], ["10.100.2.0/24"]]}
+  leaf5:
     - { vrf: PROD, networks: [["10.100.0.0/24"], ["10.100.1.0/24"], ["10.100.2.0/24"]]}
 ...
