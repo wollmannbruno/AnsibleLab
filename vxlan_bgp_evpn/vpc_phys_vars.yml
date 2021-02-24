@@ -37,11 +37,9 @@ vpc_interface:
   leaf1:
     portchannel: "5"
     peer_link: true
-    # vpc: "5"
   leaf2:
     portchannel: "5"
     peer_link: true
-    # vpc: "5"
 
 pka_vrf:
   leaf1:
